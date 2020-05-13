@@ -16,5 +16,11 @@ namespace CapaPresentacion
         {
             InitializeComponent();
         }
+
+        private void añadirLibroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmAnadirLibro frm = new FrmAnadirLibro();
+            frm.ShowDialog(this);
+        }
     }
 }
