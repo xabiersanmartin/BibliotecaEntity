@@ -69,6 +69,7 @@
             this.borrarLibroToolStripMenuItem.Name = "borrarLibroToolStripMenuItem";
             this.borrarLibroToolStripMenuItem.Size = new System.Drawing.Size(102, 24);
             this.borrarLibroToolStripMenuItem.Text = "Borrar Libro";
+            this.borrarLibroToolStripMenuItem.Click += new System.EventHandler(this.borrarLibroToolStripMenuItem_Click);
             // 
             // FrmPrincipal
             // 

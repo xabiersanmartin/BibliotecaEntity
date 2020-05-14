@@ -19,7 +19,12 @@ namespace Entidades
         {
             this.Libros = new HashSet<Libro>();
         }
-    
+
+        public Autor(string descripcion)
+        {
+            Descripcion = descripcion;
+        }
+
         public int IdAutor { get; set; }
         public string Descripcion { get; set; }
     

@@ -22,5 +22,11 @@ namespace CapaPresentacion
             FrmAnadirLibro frm = new FrmAnadirLibro();
             frm.ShowDialog(this);
         }
+
+        private void borrarLibroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmBorrarLibro frm = new FrmBorrarLibro();
+            frm.ShowDialog(this);
+        }
     }
 }

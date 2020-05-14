@@ -105,6 +105,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(163, 177);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(43, 17);
@@ -114,6 +115,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(163, 236);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 17);
@@ -123,6 +125,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(163, 304);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(61, 17);
@@ -132,6 +135,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(163, 424);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(61, 17);
@@ -141,6 +145,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(163, 497);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(68, 17);
@@ -160,6 +165,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(167, 613);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(57, 17);
@@ -169,6 +175,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.Location = new System.Drawing.Point(163, 552);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(76, 17);
@@ -207,7 +214,7 @@
             // 
             this.pctCaratula.Location = new System.Drawing.Point(773, 114);
             this.pctCaratula.Name = "pctCaratula";
-            this.pctCaratula.Size = new System.Drawing.Size(421, 289);
+            this.pctCaratula.Size = new System.Drawing.Size(494, 340);
             this.pctCaratula.TabIndex = 18;
             this.pctCaratula.TabStop = false;
             // 
@@ -275,16 +282,18 @@
             this.btnAnadirCategoria.TabIndex = 25;
             this.btnAnadirCategoria.Text = "Añadir Categoria";
             this.btnAnadirCategoria.UseVisualStyleBackColor = true;
+            this.btnAnadirCategoria.Click += new System.EventHandler(this.btnAnadirCategoria_Click);
             // 
             // btnAnadirAutor
             // 
             this.btnAnadirAutor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAnadirAutor.Location = new System.Drawing.Point(1610, 696);
+            this.btnAnadirAutor.Location = new System.Drawing.Point(1610, 673);
             this.btnAnadirAutor.Name = "btnAnadirAutor";
-            this.btnAnadirAutor.Size = new System.Drawing.Size(162, 45);
+            this.btnAnadirAutor.Size = new System.Drawing.Size(162, 50);
             this.btnAnadirAutor.TabIndex = 26;
             this.btnAnadirAutor.Text = "Añadir Autor";
             this.btnAnadirAutor.UseVisualStyleBackColor = true;
+            this.btnAnadirAutor.Click += new System.EventHandler(this.btnAnadirAutor_Click);
             // 
             // FrmAnadirLibro
             // 

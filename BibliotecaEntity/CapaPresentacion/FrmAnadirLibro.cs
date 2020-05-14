@@ -136,5 +136,29 @@ namespace CapaPresentacion
                 caratula = saveFileDialog1.FileName;
             }
         }
+
+        private void btnAnadirCategoria_Click(object sender, EventArgs e)
+        {
+            string mensaje = Program.acceso.AnadirCategoria(txtCategoria.Text);
+            MessageBox.Show(mensaje);
+            txtCategoria.Text = "";
+
+            List<Categoria> categoriasNuevas = Program.acceso.DevolverCategorias();
+            cboCategorias.Items.Clear();
+            cboCategorias.Items.AddRange(categoriasNuevas.ToArray());
+            cboCategorias.DisplayMember = "Descripcion";
+        }
+
+        private void btnAnadirAutor_Click(object sender, EventArgs e)
+        {
+            string mensaje = Program.acceso.AnadirAutor(txtAutor.Text);
+            MessageBox.Show(mensaje);
+            txtAutor.Text = "";
+
+            List<Autor> autoresNuevos = Program.acceso.DevolverAutores();
+            cboAutores.Items.Clear();
+            cboAutores.Items.AddRange(autoresNuevos.ToArray());
+            cboAutores.DisplayMember = "Descripcion";
+        }
     }
 }
