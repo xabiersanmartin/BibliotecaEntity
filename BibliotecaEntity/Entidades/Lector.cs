@@ -19,7 +19,16 @@ namespace Entidades
         {
             this.Prestamos = new HashSet<Prestamo>();
         }
-    
+
+        public Lector(int numeroCarnet, string nombre, string contrasena, string telefono, string mail)
+        {
+            NumeroCarnet = numeroCarnet;
+            Nombre = nombre;
+            Contrasena = contrasena;
+            Telefono = telefono;
+            Mail = mail;
+        }
+
         public int NumeroCarnet { get; set; }
         public string Nombre { get; set; }
         public string Contrasena { get; set; }

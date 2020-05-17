@@ -32,6 +32,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.añadirLibroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.borrarLibroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.prestarLibroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,7 +51,8 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.añadirLibroToolStripMenuItem,
-            this.borrarLibroToolStripMenuItem});
+            this.borrarLibroToolStripMenuItem,
+            this.prestarLibroToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 28);
@@ -70,6 +72,13 @@
             this.borrarLibroToolStripMenuItem.Size = new System.Drawing.Size(102, 24);
             this.borrarLibroToolStripMenuItem.Text = "Borrar Libro";
             this.borrarLibroToolStripMenuItem.Click += new System.EventHandler(this.borrarLibroToolStripMenuItem_Click);
+            // 
+            // prestarLibroToolStripMenuItem
+            // 
+            this.prestarLibroToolStripMenuItem.Name = "prestarLibroToolStripMenuItem";
+            this.prestarLibroToolStripMenuItem.Size = new System.Drawing.Size(106, 24);
+            this.prestarLibroToolStripMenuItem.Text = "Prestar Libro";
+            this.prestarLibroToolStripMenuItem.Click += new System.EventHandler(this.prestarLibroToolStripMenuItem_Click);
             // 
             // FrmPrincipal
             // 
@@ -95,6 +104,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem añadirLibroToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem borrarLibroToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem prestarLibroToolStripMenuItem;
     }
 }
 

@@ -20,7 +20,7 @@ namespace CapaDatos
             }
             catch (Exception ex)
             {
-                msg  = "No se a podido conectar con la base de datos, contacte con el administrador, código de error: " + ex.Message;
+                msg = "No se a podido conectar con la base de datos, contacte con el administrador, código de error: " + ex.Message;
             }
         }
 
@@ -34,7 +34,7 @@ namespace CapaDatos
             {
                 return null;
             }
-            
+
         }
 
         public List<Autor> DevolverAutores()
@@ -47,7 +47,7 @@ namespace CapaDatos
             {
                 return null;
             }
-            
+
         }
 
         public List<Libro> DevolverLibros(out string msg)
@@ -68,11 +68,11 @@ namespace CapaDatos
         {
             int isbn;
             bool formato = false; //Esta variable la pondremos en true en caso de que no pueda transformarse de string a int ya que sera "un formato invalido"
-            if(!int.TryParse(isbnS, out isbn)) formato = true;
+            if (!int.TryParse(isbnS, out isbn)) formato = true;
             if (formato == true) return "Formato de isbn incorrecto, debe ser númerico";
 
             int unidades;
-            if (! int.TryParse(unidadesS, out unidades)) formato = true;
+            if (!int.TryParse(unidadesS, out unidades)) formato = true;
             if (formato == true) return "Formato de unidades incorrecto, debe ser númerico";
 
             if (String.IsNullOrWhiteSpace(titulo)) return "No puedes dejar el titulo vacio";
@@ -128,7 +128,7 @@ namespace CapaDatos
             }
         }
 
-        public string AnadirCategoria (string nombreCategoria)
+        public string AnadirCategoria(string nombreCategoria)
         {
             if (String.IsNullOrWhiteSpace(nombreCategoria))
             {
@@ -149,17 +149,17 @@ namespace CapaDatos
             }
             catch (Exception ex)
             {
-                return "Error, mensaje del error: "+ex.Message;
+                return "Error, mensaje del error: " + ex.Message;
             }
         }
 
-        public string AnadirAutor (string nombreAutor)
+        public string AnadirAutor(string nombreAutor)
         {
             if (String.IsNullOrWhiteSpace(nombreAutor)) return "El nombre del autor no puede quedarse vacío";
 
-            List<Autor> comprobarAutor = proyectoBiblioteca.Autors.Where(autor => autor.Descripcion == nombreAutor).ToList();
+            Autor comprobarAutor = proyectoBiblioteca.Autors.Where(autor => autor.Descripcion == nombreAutor).SingleOrDefault();
 
-            if (comprobarAutor.Count != 0) return "Este autor ya existe";
+            if (comprobarAutor != null) return "Este autor ya existe";
 
             Autor nuevoAutor = new Autor(nombreAutor);
 
@@ -177,7 +177,7 @@ namespace CapaDatos
             }
         }
 
-        public string EliminarLibro (string idLibroS)
+        public string EliminarLibro(string idLibroS)
         {
             if (String.IsNullOrWhiteSpace(idLibroS)) return "El isbn no puede estar vacio";
 
@@ -191,7 +191,7 @@ namespace CapaDatos
                 return "No existe el libro";
             }
 
-            List<Prestamo> comprobarPrestamo = proyectoBiblioteca.Prestamos.Where(prest=> prest.IdLibro == idLibro).ToList();
+            List<Prestamo> comprobarPrestamo = proyectoBiblioteca.Prestamos.Where(prest => prest.IdLibro == idLibro).ToList();
             if (comprobarPrestamo.Count != 0)
             {
                 string lectores = "";
@@ -199,11 +199,11 @@ namespace CapaDatos
                 for (int i = 0; i < comprobarPrestamo.Count; i++)
                 {
                     Lector lector = proyectoBiblioteca.Lectors.Find(comprobarPrestamo[i].IdLector);
-                    int result = DateTime.Compare(comprobarPrestamo[i].FechaDevolucion, DateTime.Today);                    
+                    int result = DateTime.Compare(comprobarPrestamo[i].FechaDevolucion, DateTime.Today);
                     if (result > 0)
                     {
                         comprobacionMensaje += 1;
-                        if (i+1 == comprobarPrestamo.Count)
+                        if (i + 1 == comprobarPrestamo.Count)
                         {
                             lectores += String.Concat(lector.Nombre + " ");
                         }
@@ -236,6 +236,126 @@ namespace CapaDatos
             catch (Exception ex)
             {
                 return "Error, mensaje del error: " + ex.Message;
+            }
+        }
+
+        public List<Libro> BuscarLibro(string nombreLibro)
+        {
+            List<Libro> libroFiltrado = new List<Libro>();
+            libroFiltrado = proyectoBiblioteca.Libros.Where(lib => lib.Titulo.Contains(nombreLibro)).ToList();
+
+            return libroFiltrado;
+        }
+
+        public bool ComprobarNumeroCarnet(int numeroCarnet)
+        {
+            Lector comprobarLector = proyectoBiblioteca.Lectors.Find(numeroCarnet);
+
+            if (comprobarLector != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public string AnadirLector(string numeroCarnetS, string nombre, string contrasena, string telefonoS, string mail)
+        {
+            if (String.IsNullOrWhiteSpace(numeroCarnetS)) return "El número de carnet no puede estar vacio";
+
+            if (String.IsNullOrWhiteSpace(nombre)) return "El nombre no puede estar vacio";
+
+            if (String.IsNullOrWhiteSpace(contrasena)) return "La contrseña no puede estar vacio";
+
+            if (String.IsNullOrWhiteSpace(telefonoS)) return "El télefono no puede estar vacio";
+
+            if (String.IsNullOrWhiteSpace(mail)) return "El mail no puede estar vacio";
+
+            int numeroCarnet;
+            if (!int.TryParse(numeroCarnetS, out numeroCarnet)) return "Formato incorrecto, recuerda que el número de carnet debe ser numerico";
+
+            if (numeroCarnet <= 0) return "El número de carnet debe ser un número positivo y mayor a 0";
+
+            if (telefonoS.Length > 9) return "El teléfono debe tener 9 números";
+
+            int telefono;
+            if (!int.TryParse(telefonoS, out telefono)) return "El número de télefono debe ser númerico";
+
+            if (proyectoBiblioteca.Lectors.Find(numeroCarnet) != null) return "Este socio ya existe";
+
+            Lector nuevoLector = new Lector(numeroCarnet, nombre, contrasena, telefonoS, mail);
+            try
+            {
+                proyectoBiblioteca.Lectors.Add(nuevoLector);
+
+                int cambios = proyectoBiblioteca.SaveChanges();
+                if (cambios == 0) return "Fallo al añadir un nuevo socio";
+                return "Socio añadido correctamente";
+            }
+            catch (Exception ex)
+            {
+                return "Error, el mensaje de error es: " + ex.Message;
+            }
+        }
+        public string AnadirPrestamo(int idLibro, int numeroCarnet)
+        {
+            Libro comprobarLibro = proyectoBiblioteca.Libros.Find(idLibro);
+            Prestamo comprobarPrestamo = proyectoBiblioteca.Prestamos.Find(idLibro, numeroCarnet);
+            Lector comprobarLector = proyectoBiblioteca.Lectors.Find(numeroCarnet);
+
+            //Comprobaciones: los datos introducidos son válidos
+            if (comprobarLector == null) return "No existe el socio";
+            if (comprobarLibro == null) return "No existe el libro";
+            if (comprobarPrestamo != null) return "Este socio ya tiene prestado este libro";
+
+            //Comprobaciones: disponibilidad del libro
+            Libro modificarLibro = new Libro();
+            if (comprobarLibro.Disponibilidad == true)
+            {
+                if ((comprobarLibro.Unidades - comprobarLibro.NumPrestado) == 0)
+                {
+                    modificarLibro = new Libro(comprobarLibro.Isbn, comprobarLibro.Titulo, comprobarLibro.Editorial, comprobarLibro.Sipnosis, comprobarLibro.Caratula, comprobarLibro.Unidades, comprobarLibro.NumPrestado, false);
+                }
+                else
+                {
+                    modificarLibro = new Libro(comprobarLibro.Isbn, comprobarLibro.Titulo, comprobarLibro.Editorial, comprobarLibro.Sipnosis, comprobarLibro.Caratula, comprobarLibro.Unidades, comprobarLibro.NumPrestado + 1, true);
+                }
+            }
+            else
+            {
+                return "El libro no se puede prestar porque no esta disponible";
+            }
+
+            //Hacemos el préstamo
+            try
+            {
+                int exito;
+                Prestamo nuevoPrestamo = new Prestamo(idLibro, numeroCarnet, DateTime.Today, DateTime.Today.AddDays(14));
+                proyectoBiblioteca.Prestamos.Add(nuevoPrestamo);
+                exito = proyectoBiblioteca.SaveChanges();
+                if (exito != 0)
+                {
+                    Libro libroUpdate = proyectoBiblioteca.Libros.SingleOrDefault(lib => lib.Isbn == idLibro);
+                    libroUpdate.NumPrestado = modificarLibro.NumPrestado;
+                    libroUpdate.Disponibilidad = modificarLibro.Disponibilidad;
+                    exito = proyectoBiblioteca.SaveChanges();
+                    if (exito != 0)
+                    {
+                        return "Préstamo añadido correctamente";
+                    }
+                    else
+                    {
+                        proyectoBiblioteca.Prestamos.Remove(nuevoPrestamo);
+                        return "El préstamo no pudo realizarse";
+                    }
+                }
+                else
+                {
+                    return "El préstamo no pudo realizarse";
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error, el mensaje de error es: " + ex.Message;
             }
         }
     }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,10 @@ namespace CapaPresentacion
 {
     public partial class FrmAnadirLibro : Form
     {
+        string rutaCaratulas = Path.GetDirectoryName(Application.ExecutablePath) + @"\Caratulas\";
+        string nombreImagen;
+        string rutaImagen;
+        bool controlImagen = false;
         List<Categoria> anadirCategorias = new List<Categoria>();
         List<Autor> anadirAutores = new List<Autor>();
         string caratula = "";
@@ -39,7 +44,7 @@ namespace CapaPresentacion
         {
             if (anadirAutores.Count == 0)
             {
-                MessageBox.Show("Debes añadir minimo un autor para poder añadir este libro","ATENCIÓN");
+                MessageBox.Show("Debes añadir minimo un autor para poder añadir este libro", "ATENCIÓN");
                 return;
             }
             if (anadirCategorias.Count == 0)
@@ -83,10 +88,13 @@ namespace CapaPresentacion
                     cboCategorias.SelectedIndex = -1;
                     anadirAutores.Clear();
                     anadirCategorias.Clear();
+                    nombreImagen = "";
+                    rutaImagen = "";
+                    controlImagen = true;
                     break;
                 default:
                     break;
-            }  
+            }
         }
 
         private void cboCategorias_SelectedIndexChanged(object sender, EventArgs e)
@@ -119,21 +127,39 @@ namespace CapaPresentacion
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
+            if (File.Exists(rutaCaratulas + nombreImagen) && controlImagen == false)
+            {
+                pctCaratula.Image.Dispose();
+                pctCaratula.Image = null;
+                File.Delete(rutaCaratulas + nombreImagen);
+            }
             Close();
         }
 
         private void btnSeleccionarCaratula_Click(object sender, EventArgs e)
         {
+            
             OpenFileDialog saveFileDialog1 = new OpenFileDialog();
             saveFileDialog1.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif| Png Image|*.png"; //Filtro para evitar que seleccionen cualquier cosa del ordenador.
-            saveFileDialog1.Title = "Selecciona la caratula";
+            saveFileDialog1.Title = "Selecciona la carátula";
             saveFileDialog1.ShowDialog();
-
             if (saveFileDialog1.FileName != "")
             {
-                pctCaratula.ImageLocation = saveFileDialog1.FileName;
+                nombreImagen = saveFileDialog1.SafeFileName;
+                rutaImagen = saveFileDialog1.FileName;
+                if (!File.Exists(rutaCaratulas + nombreImagen))
+                {
+                    File.Copy(rutaImagen, rutaCaratulas + nombreImagen);
+                }
+                else
+                {
+                    MessageBox.Show("La carátula seleccionada ya esta asignada a un libro", "ATENCIÓN");
+                    return;
+                }
+                pctCaratula.Image = new Bitmap(rutaCaratulas + nombreImagen);
                 pctCaratula.SizeMode = PictureBoxSizeMode.StretchImage;
-                caratula = saveFileDialog1.FileName;
+                caratula = nombreImagen;
+                controlImagen = false;
             }
         }
 

@@ -12,7 +12,7 @@ namespace Entidades
     using System;
     using System.Collections.Generic;
     
-    public partial class Prestamo
+    public partial class Prestamo : IEquatable<Prestamo>
     {
         public int IdLibro { get; set; }
         public int IdLector { get; set; }
@@ -26,5 +26,32 @@ namespace Entidades
         {
         }
 
+        public Prestamo(int idLibro, int idLector, DateTime fechaPrestado, DateTime fechaDevolucion)
+        {
+            IdLibro = idLibro;
+            IdLector = idLector;
+            FechaPrestado = fechaPrestado;
+            FechaDevolucion = fechaDevolucion;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Prestamo);
+        }
+
+        public bool Equals(Prestamo other)
+        {
+            return other != null &&
+                   IdLibro == other.IdLibro &&
+                   IdLector == other.IdLector;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 1463952393;
+            hashCode = hashCode * -1521134295 + IdLibro.GetHashCode();
+            hashCode = hashCode * -1521134295 + IdLector.GetHashCode();
+            return hashCode;
+        }
     }
 }

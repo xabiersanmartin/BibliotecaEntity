@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace CapaPresentacion
 {
     public partial class FrmBorrarLibro : Form
     {
+        string rutaCaratulas = Path.GetDirectoryName(Application.ExecutablePath) + @"\Caratulas\";
         public FrmBorrarLibro()
         {
             InitializeComponent();
@@ -53,7 +55,7 @@ namespace CapaPresentacion
             lblEditorial.Text = libroSeleccionado.Editorial;
             lblIsbn.Text = libroSeleccionado.Isbn.ToString();
             lblUnidades.Text = libroSeleccionado.Unidades.ToString();
-            pctCaratula.ImageLocation = libroSeleccionado.Caratula;
+            pctCaratula.ImageLocation = rutaCaratulas + libroSeleccionado.Caratula;
             pctCaratula.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
@@ -66,6 +68,7 @@ namespace CapaPresentacion
             }
 
             Libro libroEliminar = cboLibros.SelectedItem as Libro;
+            string nombreCaratula = libroEliminar.Caratula;
             string mensaje = Program.acceso.EliminarLibro(libroEliminar.Isbn.ToString());
             if (mensaje != "Libro eliminado correctamente")
             {
@@ -73,6 +76,12 @@ namespace CapaPresentacion
             }
             else
             {
+                if (File.Exists(rutaCaratulas + nombreCaratula))
+                {
+                    pctCaratula.Image.Dispose();
+                    pctCaratula.Image = null;
+                    File.Delete(rutaCaratulas + nombreCaratula);
+                }
                 MessageBox.Show(mensaje);
             }
             
@@ -104,8 +113,6 @@ namespace CapaPresentacion
             lblEditorial.Text = "";
             lblTitulo.Text = "";
             lblUnidades.Text = "";
-            pctCaratula.Image.Dispose();
-            pctCaratula.Image = null;
         }
 
         private void btnVolver_Click(object sender, EventArgs e)

@@ -46,5 +46,25 @@ namespace CapaAcceso
         {
             return nuevoAcceso.EliminarLibro(idLibro);
         }
+
+        public List<Libro> BuscarLibros(string nombreLibro)
+        {
+            return nuevoAcceso.BuscarLibro(nombreLibro);
+        }
+
+        public bool ComprobarNumeroCarnet (int numeroCarnet)
+        {
+            return nuevoAcceso.ComprobarNumeroCarnet(numeroCarnet);
+        }
+
+        public string AnadirLector (string numeroCarnet, string nombre, string contrasena, string telefono, string mail)
+        {
+            return nuevoAcceso.AnadirLector(numeroCarnet, nombre, contrasena, telefono, mail);
+        }
+
+        public string AnadirPrestamo (int idLibro, int numeroCarnet)
+        {
+            return nuevoAcceso.AnadirPrestamo(idLibro, numeroCarnet);
+        }
     }
 }

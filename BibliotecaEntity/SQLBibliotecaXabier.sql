@@ -128,7 +128,7 @@ INSERT [dbo].[Libros] ([Isbn], [Titulo], [Editorial], [Sipnosis], [Caratula] , [
 INSERT [dbo].[Libros] ([Isbn], [Titulo], [Editorial], [Sipnosis], [Caratula] , [Unidades], [NumPrestado], [Disponibilidad]) VALUES (4, 'One Piece','Viz Media', 'El pirata luffy tratara de encontrar una banda pirata de 10 inetgrantes para surcar los mares','onePiece.png', 12,1, 1)
 
 INSERT [dbo].[Categorias] ([Descripcion]) VALUES ('Aventura')
-INSERT [dbo].[Categorias] ([Descripcion]) VALUES ('Accion')
+INSERT [dbo].[Categorias] ([Descripcion]) VALUES ('Acción')
 INSERT [dbo].[Categorias] ([Descripcion]) VALUES ('Infantil')
 
 INSERT [dbo].[Autores] ([Descripcion]) VALUES ('Eichiro Oda')

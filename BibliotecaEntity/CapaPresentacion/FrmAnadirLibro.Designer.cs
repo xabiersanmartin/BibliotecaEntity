@@ -140,7 +140,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(61, 17);
             this.label5.TabIndex = 10;
-            this.label5.Text = "Caratula";
+            this.label5.Text = "Carátula";
             // 
             // label6
             // 
@@ -180,7 +180,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(76, 17);
             this.label9.TabIndex = 14;
-            this.label9.Text = "Categorias";
+            this.label9.Text = "Categorías";
             // 
             // cboCategorias
             // 
@@ -206,7 +206,7 @@
             this.btnSeleccionarCaratula.Name = "btnSeleccionarCaratula";
             this.btnSeleccionarCaratula.Size = new System.Drawing.Size(135, 46);
             this.btnSeleccionarCaratula.TabIndex = 17;
-            this.btnSeleccionarCaratula.Text = "Seleccionar Caratula";
+            this.btnSeleccionarCaratula.Text = "Seleccionar Carátula";
             this.btnSeleccionarCaratula.UseVisualStyleBackColor = true;
             this.btnSeleccionarCaratula.Click += new System.EventHandler(this.btnSeleccionarCaratula_Click);
             // 
@@ -247,7 +247,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(218, 41);
             this.label10.TabIndex = 21;
-            this.label10.Text = "Añadir categoria";
+            this.label10.Text = "Añadir categoría";
             // 
             // txtCategoria
             // 
@@ -280,7 +280,7 @@
             this.btnAnadirCategoria.Name = "btnAnadirCategoria";
             this.btnAnadirCategoria.Size = new System.Drawing.Size(162, 51);
             this.btnAnadirCategoria.TabIndex = 25;
-            this.btnAnadirCategoria.Text = "Añadir Categoria";
+            this.btnAnadirCategoria.Text = "Añadir Categoría";
             this.btnAnadirCategoria.UseVisualStyleBackColor = true;
             this.btnAnadirCategoria.Click += new System.EventHandler(this.btnAnadirCategoria_Click);
             // 
