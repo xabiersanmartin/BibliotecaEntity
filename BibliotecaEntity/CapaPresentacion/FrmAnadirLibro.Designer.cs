@@ -63,6 +63,7 @@
             this.txtIsbn.Name = "txtIsbn";
             this.txtIsbn.Size = new System.Drawing.Size(135, 22);
             this.txtIsbn.TabIndex = 0;
+            this.txtIsbn.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIsbn_KeyPress);
             // 
             // txtTitulo
             // 
@@ -92,6 +93,7 @@
             this.txtUnidades.Name = "txtUnidades";
             this.txtUnidades.Size = new System.Drawing.Size(100, 22);
             this.txtUnidades.TabIndex = 5;
+            this.txtUnidades.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUnidades_KeyPress);
             // 
             // label1
             // 

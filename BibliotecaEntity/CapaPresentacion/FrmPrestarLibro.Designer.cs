@@ -49,6 +49,7 @@
             this.txtMailLector = new System.Windows.Forms.TextBox();
             this.btnAnadirLector = new System.Windows.Forms.Button();
             this.chkPass = new System.Windows.Forms.CheckBox();
+            this.btnVolver = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLibro)).BeginInit();
             this.SuspendLayout();
             // 
@@ -95,6 +96,7 @@
             this.txtNumeroCarnet.Name = "txtNumeroCarnet";
             this.txtNumeroCarnet.Size = new System.Drawing.Size(273, 22);
             this.txtNumeroCarnet.TabIndex = 4;
+            this.txtNumeroCarnet.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumeroCarnet_KeyPress);
             // 
             // label3
             // 
@@ -236,11 +238,22 @@
             this.chkPass.UseVisualStyleBackColor = true;
             this.chkPass.CheckedChanged += new System.EventHandler(this.chkPass_CheckedChanged);
             // 
+            // btnVolver
+            // 
+            this.btnVolver.Location = new System.Drawing.Point(12, 738);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(115, 41);
+            this.btnVolver.TabIndex = 21;
+            this.btnVolver.Text = "&Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            // 
             // FrmPrestarLibro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1464, 718);
+            this.ClientSize = new System.Drawing.Size(1464, 803);
+            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.chkPass);
             this.Controls.Add(this.btnAnadirLector);
             this.Controls.Add(this.txtMailLector);
@@ -296,5 +309,6 @@
         private System.Windows.Forms.TextBox txtMailLector;
         private System.Windows.Forms.Button btnAnadirLector;
         private System.Windows.Forms.CheckBox chkPass;
+        private System.Windows.Forms.Button btnVolver;
     }
 }

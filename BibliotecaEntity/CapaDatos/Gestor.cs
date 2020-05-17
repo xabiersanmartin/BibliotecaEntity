@@ -247,6 +247,31 @@ namespace CapaDatos
             return libroFiltrado;
         }
 
+        public List<Prestamo> PrestamosLector (string numeroCarnetS, out string msg)
+        {
+            if(String.IsNullOrWhiteSpace(numeroCarnetS))
+            {
+                msg = "El número de carnet no puede estar vacío";
+                return null;
+            }
+
+            int numeroCarnet;
+            if (!int.TryParse(numeroCarnetS, out numeroCarnet)){
+                msg = "El número de carnet debe ser numérico";
+                return null;
+            }
+
+            List<Prestamo> prestamosLector = proyectoBiblioteca.Prestamos.Where(prest => prest.IdLector == numeroCarnet).ToList();
+
+            if (prestamosLector.Count == 0){
+                msg = "Este socio no tiene ningún préstamo";
+                return null;
+            }
+
+            msg = "";
+            return prestamosLector;
+        }
+
         public bool ComprobarNumeroCarnet(int numeroCarnet)
         {
             Lector comprobarLector = proyectoBiblioteca.Lectors.Find(numeroCarnet);
@@ -352,6 +377,50 @@ namespace CapaDatos
                 {
                     return "El préstamo no pudo realizarse";
                 }
+            }
+            catch (Exception ex)
+            {
+                return "Error, el mensaje de error es: " + ex.Message;
+            }
+        }
+
+        public String EliminarPrestamo (int isbn, int numeroCarnet)
+        {
+            if (proyectoBiblioteca.Lectors.Find(numeroCarnet) == null) return "Este socio no existe";
+
+            if (proyectoBiblioteca.Libros.Find(isbn) == null) return "No existe el libro";
+
+            if (proyectoBiblioteca.Prestamos.Find(isbn, numeroCarnet) == null) return "Este préstamo no existe";
+
+            try
+            {
+                Prestamo prestamoEliminar = proyectoBiblioteca.Prestamos.Find(isbn, numeroCarnet);
+                proyectoBiblioteca.Prestamos.Remove(prestamoEliminar);
+                int exito = proyectoBiblioteca.SaveChanges();
+
+                if (exito != 0) {
+                    Libro libroUpdate = proyectoBiblioteca.Libros.SingleOrDefault(lib => lib.Isbn == isbn);
+                    libroUpdate.NumPrestado = libroUpdate.NumPrestado - 1;
+                    if (libroUpdate.Disponibilidad == false)
+                    {
+                        libroUpdate.Disponibilidad = true;
+                    }
+                    exito = proyectoBiblioteca.SaveChanges();
+                    if (exito != 0)
+                    {
+                        return "Libro devuelto correctamente";
+                    }
+                    else
+                    {
+                        proyectoBiblioteca.Prestamos.Add(prestamoEliminar);
+                        return "El libro no se ha podido devolver";
+                    }
+                }
+                else
+                {
+                    return "El libro no se ha podido devolver";
+                }
+
             }
             catch (Exception ex)
             {

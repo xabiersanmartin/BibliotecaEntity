@@ -186,5 +186,27 @@ namespace CapaPresentacion
             cboAutores.Items.AddRange(autoresNuevos.ToArray());
             cboAutores.DisplayMember = "Descripcion";
         }
+
+        private void txtIsbn_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back || e.KeyChar == '.'))
+            { e.Handled = true; }
+            TextBox txtDecimal = sender as TextBox;
+            if (e.KeyChar == '.' && txtDecimal.Text.Contains("."))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtUnidades_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back || e.KeyChar == '.'))
+            { e.Handled = true; }
+            TextBox txtDecimal = sender as TextBox;
+            if (e.KeyChar == '.' && txtDecimal.Text.Contains("."))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

@@ -130,6 +130,7 @@ namespace CapaPresentacion
                 string mensaje = Program.acceso.AnadirPrestamo(isbnSeleccionado, int.Parse(txtNumeroCarnet.Text));
 
                 MessageBox.Show(mensaje);
+                txtNombreLibro.Text = "";
             }
         }
 
@@ -159,6 +160,22 @@ namespace CapaPresentacion
             else
             {
                 txtContrasenaLector.PasswordChar = '*';
+            }
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void txtNumeroCarnet_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back || e.KeyChar == '.'))
+            { e.Handled = true; }
+            TextBox txtDecimal = sender as TextBox;
+            if (e.KeyChar == '.' && txtDecimal.Text.Contains("."))
+            {
+                e.Handled = true;
             }
         }
     }

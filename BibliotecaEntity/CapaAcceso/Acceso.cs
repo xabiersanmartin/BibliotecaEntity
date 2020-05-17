@@ -66,5 +66,15 @@ namespace CapaAcceso
         {
             return nuevoAcceso.AnadirPrestamo(idLibro, numeroCarnet);
         }
+
+        public string EliminarPrestamo (int isbn, int numeroCarnet)
+        {
+            return nuevoAcceso.EliminarPrestamo(isbn, numeroCarnet);
+        }
+
+        public List<Prestamo> PrestamosLector(string numeroCarnet, out string msg)
+        {
+            return nuevoAcceso.PrestamosLector(numeroCarnet, out msg);
+        }
     }
 }

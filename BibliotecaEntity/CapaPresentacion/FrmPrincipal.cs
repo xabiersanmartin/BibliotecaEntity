@@ -34,5 +34,11 @@ namespace CapaPresentacion
             FrmPrestarLibro frm = new FrmPrestarLibro();
             frm.ShowDialog(this);
         }
+
+        private void devolverLibroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmDevolucion frm = new FrmDevolucion();
+            frm.ShowDialog(this);
+        }
     }
 }

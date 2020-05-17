@@ -33,6 +33,7 @@
             this.añadirLibroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.borrarLibroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.prestarLibroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.devolverLibroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,7 +53,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.añadirLibroToolStripMenuItem,
             this.borrarLibroToolStripMenuItem,
-            this.prestarLibroToolStripMenuItem});
+            this.prestarLibroToolStripMenuItem,
+            this.devolverLibroToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 28);
@@ -80,6 +82,13 @@
             this.prestarLibroToolStripMenuItem.Text = "Prestar Libro";
             this.prestarLibroToolStripMenuItem.Click += new System.EventHandler(this.prestarLibroToolStripMenuItem_Click);
             // 
+            // devolverLibroToolStripMenuItem
+            // 
+            this.devolverLibroToolStripMenuItem.Name = "devolverLibroToolStripMenuItem";
+            this.devolverLibroToolStripMenuItem.Size = new System.Drawing.Size(120, 24);
+            this.devolverLibroToolStripMenuItem.Text = "Devolver Libro";
+            this.devolverLibroToolStripMenuItem.Click += new System.EventHandler(this.devolverLibroToolStripMenuItem_Click);
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -105,6 +114,7 @@
         private System.Windows.Forms.ToolStripMenuItem añadirLibroToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem borrarLibroToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem prestarLibroToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem devolverLibroToolStripMenuItem;
     }
 }
 
