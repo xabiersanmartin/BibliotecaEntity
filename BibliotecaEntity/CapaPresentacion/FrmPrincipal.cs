@@ -40,5 +40,28 @@ namespace CapaPresentacion
             FrmDevolucion frm = new FrmDevolucion();
             frm.ShowDialog(this);
         }
+
+        private void consultasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void consultaCategoríasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmConsultarCategorias frm = new FrmConsultarCategorias();
+            frm.ShowDialog(this);
+        }
+
+        private void consultaAutoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmConsultarAutores frm = new FrmConsultarAutores();
+            frm.ShowDialog(this);
+        }
+
+        private void consultaMorossToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmConsultarLibroNoDevueltos frm = new FrmConsultarLibroNoDevueltos();
+            frm.ShowDialog(this);
+        }
     }
 }

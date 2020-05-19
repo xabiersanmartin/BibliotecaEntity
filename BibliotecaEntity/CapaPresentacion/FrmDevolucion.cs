@@ -38,6 +38,7 @@ namespace CapaPresentacion
                 MessageBox.Show(msg, "ATENCIÓN");
                 dgvPrestamos.DataSource = null;
                 dgvPrestamos.Rows.Clear();
+                txtNumeroCarnet.Text = "";
                 return;
             }
 

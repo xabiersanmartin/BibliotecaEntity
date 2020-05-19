@@ -69,6 +69,24 @@
     <Compile Include="FrmBorrarLibro.Designer.cs">
       <DependentUpon>FrmBorrarLibro.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmConsultarAutores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmConsultarAutores.Designer.cs">
+      <DependentUpon>FrmConsultarAutores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmConsultarCategorias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmConsultarCategorias.Designer.cs">
+      <DependentUpon>FrmConsultarCategorias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmConsultarLibroNoDevueltos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmConsultarLibroNoDevueltos.Designer.cs">
+      <DependentUpon>FrmConsultarLibroNoDevueltos.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmDevolucion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +112,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmBorrarLibro.resx">
       <DependentUpon>FrmBorrarLibro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmConsultarAutores.resx">
+      <DependentUpon>FrmConsultarAutores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmConsultarCategorias.resx">
+      <DependentUpon>FrmConsultarCategorias.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmConsultarLibroNoDevueltos.resx">
+      <DependentUpon>FrmConsultarLibroNoDevueltos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmDevolucion.resx">
       <DependentUpon>FrmDevolucion.cs</DependentUpon>

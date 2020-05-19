@@ -12,9 +12,9 @@ namespace CapaAcceso
     {
         Gestor nuevoAcceso = new Gestor(out string msg);
 
-        public List<Categoria> DevolverCategorias()
+        public List<Categoria> DevolverCategorias(out string msg)
         {
-            return nuevoAcceso.DevolverCategorias();
+            return nuevoAcceso.DevolverCategorias(out msg);
         }
 
         public List<Autor> DevolverAutores()
@@ -27,22 +27,27 @@ namespace CapaAcceso
             return nuevoAcceso.DevolverLibros(out msg);
         }
 
+        public List<Libro> DevolverLibrosAutor(int idAutor, out string msg)
+        {
+            return nuevoAcceso.DevolverLibrosAutor(idAutor, out msg);
+        }
+
         public string AnadirLibro(string isbn, string titulo, string editorial, string sipnosis, string unidades, string caratula, List<Categoria> categorias, List<Autor> autores)
         {
             return nuevoAcceso.AnadirLibro(isbn, titulo, editorial, sipnosis, unidades, caratula, categorias, autores);
         }
 
-        public string AnadirCategoria (string nombreCategoria)
+        public string AnadirCategoria(string nombreCategoria)
         {
             return nuevoAcceso.AnadirCategoria(nombreCategoria);
         }
 
-        public string AnadirAutor (string nombreAutor)
+        public string AnadirAutor(string nombreAutor)
         {
             return nuevoAcceso.AnadirAutor(nombreAutor);
         }
 
-        public string EliminarLibro (string idLibro)
+        public string EliminarLibro(string idLibro)
         {
             return nuevoAcceso.EliminarLibro(idLibro);
         }
@@ -52,22 +57,22 @@ namespace CapaAcceso
             return nuevoAcceso.BuscarLibro(nombreLibro);
         }
 
-        public bool ComprobarNumeroCarnet (int numeroCarnet)
+        public bool ComprobarNumeroCarnet(int numeroCarnet)
         {
             return nuevoAcceso.ComprobarNumeroCarnet(numeroCarnet);
         }
 
-        public string AnadirLector (string numeroCarnet, string nombre, string contrasena, string telefono, string mail)
+        public string AnadirLector(string numeroCarnet, string nombre, string contrasena, string telefono, string mail)
         {
             return nuevoAcceso.AnadirLector(numeroCarnet, nombre, contrasena, telefono, mail);
         }
 
-        public string AnadirPrestamo (int idLibro, int numeroCarnet)
+        public string AnadirPrestamo(int idLibro, int numeroCarnet)
         {
             return nuevoAcceso.AnadirPrestamo(idLibro, numeroCarnet);
         }
 
-        public string EliminarPrestamo (int isbn, int numeroCarnet)
+        public string EliminarPrestamo(int isbn, int numeroCarnet)
         {
             return nuevoAcceso.EliminarPrestamo(isbn, numeroCarnet);
         }

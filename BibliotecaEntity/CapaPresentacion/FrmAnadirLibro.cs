@@ -28,8 +28,12 @@ namespace CapaPresentacion
 
         private void FrmAnadirLibro_Load(object sender, EventArgs e)
         {
-            List<Categoria> categorias = Program.acceso.DevolverCategorias();
-
+            List<Categoria> categorias = Program.acceso.DevolverCategorias(out string msg);
+            if (msg != "")
+            {
+                MessageBox.Show(msg, "ATENCIÓN");
+                return;
+            }
             cboCategorias.Items.Clear();
             cboCategorias.Items.AddRange(categorias.ToArray());
             cboCategorias.DisplayMember = "Descripcion";
@@ -169,7 +173,12 @@ namespace CapaPresentacion
             MessageBox.Show(mensaje);
             txtCategoria.Text = "";
 
-            List<Categoria> categoriasNuevas = Program.acceso.DevolverCategorias();
+            List<Categoria> categoriasNuevas = Program.acceso.DevolverCategorias(out string msg);
+            if (msg != "")
+            {
+                MessageBox.Show(msg, "ATENCIÓN");
+                return;
+            }
             cboCategorias.Items.Clear();
             cboCategorias.Items.AddRange(categoriasNuevas.ToArray());
             cboCategorias.DisplayMember = "Descripcion";

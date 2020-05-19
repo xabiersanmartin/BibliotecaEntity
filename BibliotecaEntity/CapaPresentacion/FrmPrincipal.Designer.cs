@@ -34,6 +34,10 @@
             this.borrarLibroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.prestarLibroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.devolverLibroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultaCategoríasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultaAutoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultaMorossToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,7 +58,8 @@
             this.añadirLibroToolStripMenuItem,
             this.borrarLibroToolStripMenuItem,
             this.prestarLibroToolStripMenuItem,
-            this.devolverLibroToolStripMenuItem});
+            this.devolverLibroToolStripMenuItem,
+            this.consultasToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 28);
@@ -89,6 +94,38 @@
             this.devolverLibroToolStripMenuItem.Text = "Devolver Libro";
             this.devolverLibroToolStripMenuItem.Click += new System.EventHandler(this.devolverLibroToolStripMenuItem_Click);
             // 
+            // consultasToolStripMenuItem
+            // 
+            this.consultasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.consultaCategoríasToolStripMenuItem,
+            this.consultaAutoresToolStripMenuItem,
+            this.consultaMorossToolStripMenuItem});
+            this.consultasToolStripMenuItem.Name = "consultasToolStripMenuItem";
+            this.consultasToolStripMenuItem.Size = new System.Drawing.Size(86, 24);
+            this.consultasToolStripMenuItem.Text = "Consultas";
+            this.consultasToolStripMenuItem.Click += new System.EventHandler(this.consultasToolStripMenuItem_Click);
+            // 
+            // consultaCategoríasToolStripMenuItem
+            // 
+            this.consultaCategoríasToolStripMenuItem.Name = "consultaCategoríasToolStripMenuItem";
+            this.consultaCategoríasToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.consultaCategoríasToolStripMenuItem.Text = "Consulta categorías";
+            this.consultaCategoríasToolStripMenuItem.Click += new System.EventHandler(this.consultaCategoríasToolStripMenuItem_Click);
+            // 
+            // consultaAutoresToolStripMenuItem
+            // 
+            this.consultaAutoresToolStripMenuItem.Name = "consultaAutoresToolStripMenuItem";
+            this.consultaAutoresToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.consultaAutoresToolStripMenuItem.Text = "Consulta autores";
+            this.consultaAutoresToolStripMenuItem.Click += new System.EventHandler(this.consultaAutoresToolStripMenuItem_Click);
+            // 
+            // consultaMorossToolStripMenuItem
+            // 
+            this.consultaMorossToolStripMenuItem.Name = "consultaMorossToolStripMenuItem";
+            this.consultaMorossToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.consultaMorossToolStripMenuItem.Text = "Consulta moros@s";
+            this.consultaMorossToolStripMenuItem.Click += new System.EventHandler(this.consultaMorossToolStripMenuItem_Click);
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -115,6 +152,10 @@
         private System.Windows.Forms.ToolStripMenuItem borrarLibroToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem prestarLibroToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem devolverLibroToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consultasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consultaCategoríasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consultaAutoresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consultaMorossToolStripMenuItem;
     }
 }
 

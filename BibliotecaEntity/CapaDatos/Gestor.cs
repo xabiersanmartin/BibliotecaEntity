@@ -24,14 +24,16 @@ namespace CapaDatos
             }
         }
 
-        public List<Categoria> DevolverCategorias()
+        public List<Categoria> DevolverCategorias(out string msg)
         {
             if (proyectoBiblioteca.Categorias.ToList().Count != 0)
             {
+                msg = "";
                 return proyectoBiblioteca.Categorias.ToList();
             }
             else
             {
+                msg = "No hay categorías";
                 return null;
             }
 
@@ -135,9 +137,9 @@ namespace CapaDatos
                 return "No puede estar el nombre de la categoría vacio";
             }
 
-            List<Categoria> comprobarCategoria = proyectoBiblioteca.Categorias.Where(cat => cat.Descripcion == nombreCategoria).ToList();
+            Categoria comprobarCategoria = proyectoBiblioteca.Categorias.Where(cat => cat.Descripcion == nombreCategoria).SingleOrDefault();
 
-            if (comprobarCategoria.Count != 0) return "esta categoria ya existe";
+            if (comprobarCategoria != null) return "esta categoria ya existe";
 
             Categoria nuevaCategoria = new Categoria(nombreCategoria);
             try
@@ -247,23 +249,44 @@ namespace CapaDatos
             return libroFiltrado;
         }
 
-        public List<Prestamo> PrestamosLector (string numeroCarnetS, out string msg)
+        public List<Libro> DevolverLibrosAutor(int idAutor, out string msg)
         {
-            if(String.IsNullOrWhiteSpace(numeroCarnetS))
+            Autor comprobarAutor = proyectoBiblioteca.Autors.Find(idAutor);
+
+            if (comprobarAutor == null)
+            {
+                msg = "Este autor no existe";
+                return null;
+            }
+
+            if (comprobarAutor.Libros.Count == 0)
+            {
+                msg = "Este autor no tiene libros";
+                return null;
+            }
+            msg = "";
+            return comprobarAutor.Libros.ToList();
+        }
+
+        public List<Prestamo> PrestamosLector(string numeroCarnetS, out string msg)
+        {
+            if (String.IsNullOrWhiteSpace(numeroCarnetS))
             {
                 msg = "El número de carnet no puede estar vacío";
                 return null;
             }
 
             int numeroCarnet;
-            if (!int.TryParse(numeroCarnetS, out numeroCarnet)){
+            if (!int.TryParse(numeroCarnetS, out numeroCarnet))
+            {
                 msg = "El número de carnet debe ser numérico";
                 return null;
             }
 
             List<Prestamo> prestamosLector = proyectoBiblioteca.Prestamos.Where(prest => prest.IdLector == numeroCarnet).ToList();
 
-            if (prestamosLector.Count == 0){
+            if (prestamosLector.Count == 0)
+            {
                 msg = "Este socio no tiene ningún préstamo";
                 return null;
             }
@@ -336,9 +359,9 @@ namespace CapaDatos
             Libro modificarLibro = new Libro();
             if (comprobarLibro.Disponibilidad == true)
             {
-                if ((comprobarLibro.Unidades - comprobarLibro.NumPrestado) == 0)
+                if ((comprobarLibro.Unidades - comprobarLibro.NumPrestado) == 1)
                 {
-                    modificarLibro = new Libro(comprobarLibro.Isbn, comprobarLibro.Titulo, comprobarLibro.Editorial, comprobarLibro.Sipnosis, comprobarLibro.Caratula, comprobarLibro.Unidades, comprobarLibro.NumPrestado, false);
+                    modificarLibro = new Libro(comprobarLibro.Isbn, comprobarLibro.Titulo, comprobarLibro.Editorial, comprobarLibro.Sipnosis, comprobarLibro.Caratula, comprobarLibro.Unidades, comprobarLibro.NumPrestado + 1, false);
                 }
                 else
                 {
@@ -384,7 +407,7 @@ namespace CapaDatos
             }
         }
 
-        public String EliminarPrestamo (int isbn, int numeroCarnet)
+        public String EliminarPrestamo(int isbn, int numeroCarnet)
         {
             if (proyectoBiblioteca.Lectors.Find(numeroCarnet) == null) return "Este socio no existe";
 
@@ -398,7 +421,8 @@ namespace CapaDatos
                 proyectoBiblioteca.Prestamos.Remove(prestamoEliminar);
                 int exito = proyectoBiblioteca.SaveChanges();
 
-                if (exito != 0) {
+                if (exito != 0)
+                {
                     Libro libroUpdate = proyectoBiblioteca.Libros.SingleOrDefault(lib => lib.Isbn == isbn);
                     libroUpdate.NumPrestado = libroUpdate.NumPrestado - 1;
                     if (libroUpdate.Disponibilidad == false)

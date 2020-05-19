@@ -22,6 +22,11 @@ namespace Entidades
             this.Categorias = new HashSet<Categoria>();
         }
 
+        public Libro(int isbn)
+        {
+            Isbn = isbn;
+        }
+
         public Libro(int isbn, string titulo, string editorial, string sipnosis, string caratula, int unidades, int numPrestado, bool disponibilidad)
         {
             Isbn = isbn;
