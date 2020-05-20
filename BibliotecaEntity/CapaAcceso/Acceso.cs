@@ -17,9 +17,9 @@ namespace CapaAcceso
             return nuevoAcceso.DevolverCategorias(out msg);
         }
 
-        public List<Autor> DevolverAutores()
+        public List<Autor> DevolverAutores(out string msg)
         {
-            return nuevoAcceso.DevolverAutores();
+            return nuevoAcceso.DevolverAutores(out msg);
         }
 
         public List<Libro> DevolverLibros(out string msg)

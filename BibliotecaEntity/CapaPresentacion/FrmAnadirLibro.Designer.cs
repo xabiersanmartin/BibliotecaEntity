@@ -54,6 +54,9 @@
             this.label11 = new System.Windows.Forms.Label();
             this.btnAnadirCategoria = new System.Windows.Forms.Button();
             this.btnAnadirAutor = new System.Windows.Forms.Button();
+            this.lstCategorias = new System.Windows.Forms.ListBox();
+            this.lblCategoriaSeleccionada = new System.Windows.Forms.Label();
+            this.lblEliminarCategoria = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pctCaratula)).BeginInit();
             this.SuspendLayout();
             // 
@@ -112,7 +115,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(43, 17);
             this.label2.TabIndex = 7;
-            this.label2.Text = "Titulo";
+            this.label2.Text = "Título";
             // 
             // label3
             // 
@@ -168,7 +171,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(167, 613);
+            this.label8.Location = new System.Drawing.Point(167, 721);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(57, 17);
             this.label8.TabIndex = 13;
@@ -178,7 +181,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(163, 552);
+            this.label9.Location = new System.Drawing.Point(163, 571);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(76, 17);
             this.label9.TabIndex = 14;
@@ -187,16 +190,18 @@
             // cboCategorias
             // 
             this.cboCategorias.FormattingEnabled = true;
-            this.cboCategorias.Location = new System.Drawing.Point(305, 552);
+            this.cboCategorias.Location = new System.Drawing.Point(305, 571);
             this.cboCategorias.Name = "cboCategorias";
             this.cboCategorias.Size = new System.Drawing.Size(169, 24);
             this.cboCategorias.TabIndex = 15;
             this.cboCategorias.SelectedIndexChanged += new System.EventHandler(this.cboCategorias_SelectedIndexChanged);
+            this.cboCategorias.Enter += new System.EventHandler(this.cboCategorias_Enter);
+            this.cboCategorias.Leave += new System.EventHandler(this.cboCategorias_Leave);
             // 
             // cboAutores
             // 
             this.cboAutores.FormattingEnabled = true;
-            this.cboAutores.Location = new System.Drawing.Point(305, 613);
+            this.cboAutores.Location = new System.Drawing.Point(305, 721);
             this.cboAutores.Name = "cboAutores";
             this.cboAutores.Size = new System.Drawing.Size(169, 24);
             this.cboAutores.TabIndex = 16;
@@ -223,9 +228,9 @@
             // btnAnadirLibro
             // 
             this.btnAnadirLibro.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAnadirLibro.Location = new System.Drawing.Point(634, 716);
+            this.btnAnadirLibro.Location = new System.Drawing.Point(861, 822);
             this.btnAnadirLibro.Name = "btnAnadirLibro";
-            this.btnAnadirLibro.Size = new System.Drawing.Size(135, 46);
+            this.btnAnadirLibro.Size = new System.Drawing.Size(176, 69);
             this.btnAnadirLibro.TabIndex = 19;
             this.btnAnadirLibro.Text = "Añadir Libro";
             this.btnAnadirLibro.UseVisualStyleBackColor = true;
@@ -233,7 +238,7 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(12, 899);
+            this.btnVolver.Location = new System.Drawing.Point(12, 930);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(135, 46);
             this.btnVolver.TabIndex = 20;
@@ -297,11 +302,43 @@
             this.btnAnadirAutor.UseVisualStyleBackColor = true;
             this.btnAnadirAutor.Click += new System.EventHandler(this.btnAnadirAutor_Click);
             // 
+            // lstCategorias
+            // 
+            this.lstCategorias.FormattingEnabled = true;
+            this.lstCategorias.ItemHeight = 16;
+            this.lstCategorias.Location = new System.Drawing.Point(572, 551);
+            this.lstCategorias.Name = "lstCategorias";
+            this.lstCategorias.Size = new System.Drawing.Size(208, 116);
+            this.lstCategorias.TabIndex = 27;
+            this.lstCategorias.DoubleClick += new System.EventHandler(this.lstCategorias_DoubleClick);
+            this.lstCategorias.Leave += new System.EventHandler(this.lstCategorias_Leave);
+            // 
+            // lblCategoriaSeleccionada
+            // 
+            this.lblCategoriaSeleccionada.AutoSize = true;
+            this.lblCategoriaSeleccionada.Location = new System.Drawing.Point(572, 528);
+            this.lblCategoriaSeleccionada.Name = "lblCategoriaSeleccionada";
+            this.lblCategoriaSeleccionada.Size = new System.Drawing.Size(172, 17);
+            this.lblCategoriaSeleccionada.TabIndex = 28;
+            this.lblCategoriaSeleccionada.Text = "Categorías Seleccionadas";
+            // 
+            // lblEliminarCategoria
+            // 
+            this.lblEliminarCategoria.AutoSize = true;
+            this.lblEliminarCategoria.Location = new System.Drawing.Point(807, 599);
+            this.lblEliminarCategoria.Name = "lblEliminarCategoria";
+            this.lblEliminarCategoria.Size = new System.Drawing.Size(253, 17);
+            this.lblEliminarCategoria.TabIndex = 29;
+            this.lblEliminarCategoria.Text = "Doble click para eliminar una categoría";
+            // 
             // FrmAnadirLibro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1924, 957);
+            this.ClientSize = new System.Drawing.Size(1924, 988);
+            this.Controls.Add(this.lblEliminarCategoria);
+            this.Controls.Add(this.lblCategoriaSeleccionada);
+            this.Controls.Add(this.lstCategorias);
             this.Controls.Add(this.btnAnadirAutor);
             this.Controls.Add(this.btnAnadirCategoria);
             this.Controls.Add(this.txtAutor);
@@ -367,5 +404,8 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnAnadirCategoria;
         private System.Windows.Forms.Button btnAnadirAutor;
+        private System.Windows.Forms.ListBox lstCategorias;
+        private System.Windows.Forms.Label lblCategoriaSeleccionada;
+        private System.Windows.Forms.Label lblEliminarCategoria;
     }
 }

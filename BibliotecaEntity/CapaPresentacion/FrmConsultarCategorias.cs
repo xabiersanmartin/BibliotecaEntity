@@ -35,7 +35,32 @@ namespace CapaPresentacion
 
         private void cboCategorias_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cboCategorias.SelectedIndex == -1)
+            {
+                return;
+            }
+
             Categoria categoria = cboCategorias.SelectedItem as Categoria;
+
+            if (categoria.Libros.Count == 0)
+            {
+                MessageBox.Show("Esta categoria("+categoria.Descripcion +") no tiene libros", "ATENCIÓN");
+                cboCategorias.SelectedIndex = -1;
+                cboCategorias.Text = "";
+                dgvLibrosDeCategoria.DataSource = null;
+                dgvLibrosDeCategoria.Rows.Clear();
+                return;
+            }
+
+            if(categoria.Libros.All(lib => lib.Disponibilidad == false))
+            {
+                MessageBox.Show("Esta categoría, no tiene ningún libro disponible", "ATENCIÓN");
+                cboCategorias.SelectedIndex = -1;
+                cboCategorias.Text = "";
+                dgvLibrosDeCategoria.DataSource = null;
+                dgvLibrosDeCategoria.Rows.Clear();
+                return;
+            }
             
             dgvLibrosDeCategoria.DataSource = (from lib in categoria.Libros
                                                orderby lib.Titulo
@@ -48,6 +73,12 @@ namespace CapaPresentacion
                                                    autores = string.Concat(lib.Autores.Select(aut=> aut.Descripcion + ", ")).Substring(0, string.Concat(lib.Autores.Select(aut=> aut.Descripcion + ", ")).Length -2)
                                                }).ToList();
 
+            dgvLibrosDeCategoria.Columns[1].Width = 200;
+            dgvLibrosDeCategoria.Columns[2].Width = 200;
+            dgvLibrosDeCategoria.Columns[3].Width = 250;
+
+            dgvLibrosDeCategoria.Columns[2].HeaderText = "Categorías de libro";
+            dgvLibrosDeCategoria.Columns[3].HeaderText = "Autor/es de libro";
         }
 
         private void btnVolver_Click(object sender, EventArgs e)

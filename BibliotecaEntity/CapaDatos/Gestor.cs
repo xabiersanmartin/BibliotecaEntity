@@ -39,14 +39,16 @@ namespace CapaDatos
 
         }
 
-        public List<Autor> DevolverAutores()
+        public List<Autor> DevolverAutores(out string msg)
         {
             if (proyectoBiblioteca.Autors.ToList().Count != 0)
             {
+                msg = "";
                 return proyectoBiblioteca.Autors.ToList();
             }
             else
             {
+                msg = "No hay autores";
                 return null;
             }
 

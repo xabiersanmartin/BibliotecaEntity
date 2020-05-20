@@ -28,6 +28,11 @@ namespace CapaPresentacion
 
         private void FrmAnadirLibro_Load(object sender, EventArgs e)
         {
+            //Empiezan en false puesto que se pondran visibles dependiendo del focus del combobox de categórias
+            lstCategorias.Visible = false;
+            lblCategoriaSeleccionada.Visible = false;
+            lblEliminarCategoria.Visible = false;
+
             List<Categoria> categorias = Program.acceso.DevolverCategorias(out string msg);
             if (msg != "")
             {
@@ -38,7 +43,12 @@ namespace CapaPresentacion
             cboCategorias.Items.AddRange(categorias.ToArray());
             cboCategorias.DisplayMember = "Descripcion";
 
-            List<Autor> autores = Program.acceso.DevolverAutores();
+            List<Autor> autores = Program.acceso.DevolverAutores(out string msg2);
+            if (msg2 != "")
+            {
+                MessageBox.Show(msg2, "ATENCIÓN");
+                return;
+            }
             cboAutores.Items.Clear();
             cboAutores.Items.AddRange(autores.ToArray());
             cboAutores.DisplayMember = "Descripcion";
@@ -113,6 +123,9 @@ namespace CapaPresentacion
                 return;
             }
             anadirCategorias.Add(anadirCategoria);
+            lstCategorias.Items.Clear();
+            lstCategorias.Items.AddRange(anadirCategorias.ToArray());
+            lstCategorias.DisplayMember = "Descripcion";
         }
 
         private void cboAutores_SelectedIndexChanged(object sender, EventArgs e)
@@ -190,7 +203,12 @@ namespace CapaPresentacion
             MessageBox.Show(mensaje);
             txtAutor.Text = "";
 
-            List<Autor> autoresNuevos = Program.acceso.DevolverAutores();
+            List<Autor> autoresNuevos = Program.acceso.DevolverAutores(out string msg);
+            if (msg != "")
+            {
+                MessageBox.Show(msg, "ATENCIÓN");
+                return;
+            }
             cboAutores.Items.Clear();
             cboAutores.Items.AddRange(autoresNuevos.ToArray());
             cboAutores.DisplayMember = "Descripcion";
@@ -216,6 +234,55 @@ namespace CapaPresentacion
             {
                 e.Handled = true;
             }
+        }
+
+        private void cboCategorias_Enter(object sender, EventArgs e)
+        {
+            lstCategorias.Visible = true;
+            lblCategoriaSeleccionada.Visible = true;
+            lblEliminarCategoria.Visible = true;
+        }
+
+        private void cboCategorias_Leave(object sender, EventArgs e)
+        {
+            if (lstCategorias.Focused)
+            {
+                lstCategorias.Visible = true;
+                lblCategoriaSeleccionada.Visible = true;
+                lblEliminarCategoria.Visible = true;
+            }
+            else
+            {
+                lstCategorias.Visible = false;
+                lblCategoriaSeleccionada.Visible = false;
+                lblEliminarCategoria.Visible = false;
+            }
+             
+        }
+
+        private void lstCategorias_DoubleClick(object sender, EventArgs e)
+        {
+            Categoria categoria = lstCategorias.SelectedItem as Categoria;
+            anadirCategorias.Remove(categoria);
+
+            if (anadirCategorias.Count != 0)
+            {
+                lstCategorias.Items.Clear();
+                lstCategorias.Items.AddRange(anadirCategorias.ToArray());
+                lstCategorias.DisplayMember = "Descripcion";
+            }
+            else
+            {
+                lstCategorias.Items.Clear();
+                cboCategorias.SelectedIndex = -1;
+            }
+        }
+
+        private void lstCategorias_Leave(object sender, EventArgs e)
+        {
+            lstCategorias.Visible = false;
+            lblCategoriaSeleccionada.Visible = false;
+            lblEliminarCategoria.Visible = false;
         }
     }
 }
