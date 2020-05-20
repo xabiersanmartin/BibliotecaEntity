@@ -30,8 +30,10 @@ namespace CapaPresentacion
         {
             //Empiezan en false puesto que se pondran visibles dependiendo del focus del combobox de categórias
             lstCategorias.Visible = false;
+            lstAutores.Visible = false;
             lblCategoriaSeleccionada.Visible = false;
             lblEliminarCategoria.Visible = false;
+            lblAutoresSeleccionados.Visible = false;
 
             List<Categoria> categorias = Program.acceso.DevolverCategorias(out string msg);
             if (msg != "")
@@ -130,6 +132,7 @@ namespace CapaPresentacion
 
         private void cboAutores_SelectedIndexChanged(object sender, EventArgs e)
         {
+            txtFiltrarAutor.Text = "";
             if (cboAutores.SelectedIndex == -1)
             {
                 return;
@@ -140,6 +143,9 @@ namespace CapaPresentacion
                 return;
             }
             anadirAutores.Add(anadirAutor);
+            lstAutores.Items.Clear();
+            lstAutores.Items.AddRange(anadirAutores.ToArray());
+            lstAutores.DisplayMember = "Descripcion";
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -283,6 +289,53 @@ namespace CapaPresentacion
             lstCategorias.Visible = false;
             lblCategoriaSeleccionada.Visible = false;
             lblEliminarCategoria.Visible = false;
+        }
+
+        private void txtFiltrarAutor_TextChanged(object sender, EventArgs e)
+        {
+            cboAutores.Text = "";
+            if (!String.IsNullOrEmpty(txtFiltrarAutor.Text))
+            {
+                List<Autor> autoresBuscados = Program.acceso.BuscarAutor(txtFiltrarAutor.Text);
+
+                if (autoresBuscados.Count == 0)
+                {
+                    return;
+                }
+                else
+                {
+                    cboAutores.Items.Clear();
+                    cboAutores.Items.AddRange(autoresBuscados.ToArray());
+                    cboAutores.DisplayMember = "Descripcion";
+                }
+            }
+            
+        }
+
+        private void cboAutores_Enter(object sender, EventArgs e)
+        {
+            lstAutores.Visible = true;
+            lblAutoresSeleccionados.Visible = true;
+        }
+
+        private void cboAutores_Leave(object sender, EventArgs e)
+        {
+            if (txtFiltrarAutor.Focused)
+            {
+                lstAutores.Visible = true;
+                lblAutoresSeleccionados.Visible = true;
+            }
+            else
+            {
+                lstAutores.Visible = false;
+                lblAutoresSeleccionados.Visible = false;
+            } 
+        }
+
+        private void lstAutores_Leave(object sender, EventArgs e)
+        {
+            lstAutores.Visible = false;
+            lblAutoresSeleccionados.Visible = false;
         }
     }
 }

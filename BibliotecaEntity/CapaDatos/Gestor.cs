@@ -251,6 +251,14 @@ namespace CapaDatos
             return libroFiltrado;
         }
 
+        public List<Autor> BuscarAutor(string nombreAutor)
+        {
+            List<Autor> autorFiltrado = new List<Autor>();
+            autorFiltrado = proyectoBiblioteca.Autors.Where(aut => aut.Descripcion.Contains(nombreAutor)).ToList();
+
+            return autorFiltrado;
+        }
+
         public List<Libro> DevolverLibrosAutor(int idAutor, out string msg)
         {
             Autor comprobarAutor = proyectoBiblioteca.Autors.Find(idAutor);

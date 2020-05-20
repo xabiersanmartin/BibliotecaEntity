@@ -57,6 +57,11 @@ namespace CapaAcceso
             return nuevoAcceso.BuscarLibro(nombreLibro);
         }
 
+        public List<Autor> BuscarAutor(string nombreAutor)
+        {
+            return nuevoAcceso.BuscarAutor(nombreAutor);
+        }
+
         public bool ComprobarNumeroCarnet(int numeroCarnet)
         {
             return nuevoAcceso.ComprobarNumeroCarnet(numeroCarnet);

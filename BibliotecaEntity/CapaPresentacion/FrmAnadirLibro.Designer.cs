@@ -57,6 +57,9 @@
             this.lstCategorias = new System.Windows.Forms.ListBox();
             this.lblCategoriaSeleccionada = new System.Windows.Forms.Label();
             this.lblEliminarCategoria = new System.Windows.Forms.Label();
+            this.txtFiltrarAutor = new System.Windows.Forms.TextBox();
+            this.lstAutores = new System.Windows.Forms.ListBox();
+            this.lblAutoresSeleccionados = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pctCaratula)).BeginInit();
             this.SuspendLayout();
             // 
@@ -171,7 +174,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(167, 721);
+            this.label8.Location = new System.Drawing.Point(167, 703);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(57, 17);
             this.label8.TabIndex = 13;
@@ -181,7 +184,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(163, 571);
+            this.label9.Location = new System.Drawing.Point(163, 556);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(76, 17);
             this.label9.TabIndex = 14;
@@ -190,7 +193,7 @@
             // cboCategorias
             // 
             this.cboCategorias.FormattingEnabled = true;
-            this.cboCategorias.Location = new System.Drawing.Point(305, 571);
+            this.cboCategorias.Location = new System.Drawing.Point(305, 556);
             this.cboCategorias.Name = "cboCategorias";
             this.cboCategorias.Size = new System.Drawing.Size(169, 24);
             this.cboCategorias.TabIndex = 15;
@@ -201,11 +204,13 @@
             // cboAutores
             // 
             this.cboAutores.FormattingEnabled = true;
-            this.cboAutores.Location = new System.Drawing.Point(305, 721);
+            this.cboAutores.Location = new System.Drawing.Point(575, 696);
             this.cboAutores.Name = "cboAutores";
             this.cboAutores.Size = new System.Drawing.Size(169, 24);
             this.cboAutores.TabIndex = 16;
             this.cboAutores.SelectedIndexChanged += new System.EventHandler(this.cboAutores_SelectedIndexChanged);
+            this.cboAutores.Enter += new System.EventHandler(this.cboAutores_Enter);
+            this.cboAutores.Leave += new System.EventHandler(this.cboAutores_Leave);
             // 
             // btnSeleccionarCaratula
             // 
@@ -306,7 +311,7 @@
             // 
             this.lstCategorias.FormattingEnabled = true;
             this.lstCategorias.ItemHeight = 16;
-            this.lstCategorias.Location = new System.Drawing.Point(572, 551);
+            this.lstCategorias.Location = new System.Drawing.Point(572, 536);
             this.lstCategorias.Name = "lstCategorias";
             this.lstCategorias.Size = new System.Drawing.Size(208, 116);
             this.lstCategorias.TabIndex = 27;
@@ -316,7 +321,7 @@
             // lblCategoriaSeleccionada
             // 
             this.lblCategoriaSeleccionada.AutoSize = true;
-            this.lblCategoriaSeleccionada.Location = new System.Drawing.Point(572, 528);
+            this.lblCategoriaSeleccionada.Location = new System.Drawing.Point(572, 513);
             this.lblCategoriaSeleccionada.Name = "lblCategoriaSeleccionada";
             this.lblCategoriaSeleccionada.Size = new System.Drawing.Size(172, 17);
             this.lblCategoriaSeleccionada.TabIndex = 28;
@@ -325,17 +330,47 @@
             // lblEliminarCategoria
             // 
             this.lblEliminarCategoria.AutoSize = true;
-            this.lblEliminarCategoria.Location = new System.Drawing.Point(807, 599);
+            this.lblEliminarCategoria.Location = new System.Drawing.Point(807, 584);
             this.lblEliminarCategoria.Name = "lblEliminarCategoria";
             this.lblEliminarCategoria.Size = new System.Drawing.Size(253, 17);
             this.lblEliminarCategoria.TabIndex = 29;
             this.lblEliminarCategoria.Text = "Doble click para eliminar una categoría";
+            // 
+            // txtFiltrarAutor
+            // 
+            this.txtFiltrarAutor.Location = new System.Drawing.Point(305, 698);
+            this.txtFiltrarAutor.Name = "txtFiltrarAutor";
+            this.txtFiltrarAutor.Size = new System.Drawing.Size(183, 22);
+            this.txtFiltrarAutor.TabIndex = 30;
+            this.txtFiltrarAutor.TextChanged += new System.EventHandler(this.txtFiltrarAutor_TextChanged);
+            // 
+            // lstAutores
+            // 
+            this.lstAutores.FormattingEnabled = true;
+            this.lstAutores.ItemHeight = 16;
+            this.lstAutores.Location = new System.Drawing.Point(856, 686);
+            this.lstAutores.Name = "lstAutores";
+            this.lstAutores.Size = new System.Drawing.Size(199, 84);
+            this.lstAutores.TabIndex = 31;
+            this.lstAutores.Leave += new System.EventHandler(this.lstAutores_Leave);
+            // 
+            // lblAutoresSeleccionados
+            // 
+            this.lblAutoresSeleccionados.AutoSize = true;
+            this.lblAutoresSeleccionados.Location = new System.Drawing.Point(853, 663);
+            this.lblAutoresSeleccionados.Name = "lblAutoresSeleccionados";
+            this.lblAutoresSeleccionados.Size = new System.Drawing.Size(153, 17);
+            this.lblAutoresSeleccionados.TabIndex = 32;
+            this.lblAutoresSeleccionados.Text = "Autores Seleccionados";
             // 
             // FrmAnadirLibro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1924, 988);
+            this.Controls.Add(this.lblAutoresSeleccionados);
+            this.Controls.Add(this.lstAutores);
+            this.Controls.Add(this.txtFiltrarAutor);
             this.Controls.Add(this.lblEliminarCategoria);
             this.Controls.Add(this.lblCategoriaSeleccionada);
             this.Controls.Add(this.lstCategorias);
@@ -407,5 +442,8 @@
         private System.Windows.Forms.ListBox lstCategorias;
         private System.Windows.Forms.Label lblCategoriaSeleccionada;
         private System.Windows.Forms.Label lblEliminarCategoria;
+        private System.Windows.Forms.TextBox txtFiltrarAutor;
+        private System.Windows.Forms.ListBox lstAutores;
+        private System.Windows.Forms.Label lblAutoresSeleccionados;
     }
 }
