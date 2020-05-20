@@ -320,7 +320,7 @@ namespace CapaPresentacion
 
         private void cboAutores_Leave(object sender, EventArgs e)
         {
-            if (txtFiltrarAutor.Focused)
+            if (lstAutores.Focused)
             {
                 lstAutores.Visible = true;
                 lblAutoresSeleccionados.Visible = true;
@@ -336,6 +336,31 @@ namespace CapaPresentacion
         {
             lstAutores.Visible = false;
             lblAutoresSeleccionados.Visible = false;
+        }
+
+        private void lstAutores_DoubleClick(object sender, EventArgs e)
+        {
+            Autor autor = lstAutores.SelectedItem as Autor;
+            anadirAutores.Remove(autor);
+
+            if (anadirAutores.Count != 0)
+            {
+                cboAutores.SelectedIndex = -1;
+                lstAutores.Items.Clear();
+                lstAutores.Items.AddRange(anadirAutores.ToArray());
+                lstAutores.DisplayMember = "Descripcion";
+            }
+            else
+            {
+                lstAutores.Items.Clear();
+                cboAutores.SelectedIndex = -1;
+            }
+        }
+
+        private void txtFiltrarAutor_Click(object sender, EventArgs e)
+        {
+            cboAutores.SelectedIndex = -1;
+            cboAutores.Text = "";
         }
     }
 }

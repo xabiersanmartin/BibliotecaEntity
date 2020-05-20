@@ -73,6 +73,8 @@ namespace CapaPresentacion
             if (mensaje != "Libro eliminado correctamente")
             {
                 MessageBox.Show(mensaje, "ATENCION");
+                pctCaratula.Image.Dispose();
+                pctCaratula.Image = null;
             }
             else
             {
