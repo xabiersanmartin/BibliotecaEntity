@@ -11,7 +11,7 @@ namespace CapaDatos
     {
         ProyectoBibliotecaXabierEntities proyectoBiblioteca;
 
-        public Gestor(out string msg)
+        public Gestor(out string msg) // TODO 
         {
             msg = "";
             try
@@ -24,7 +24,7 @@ namespace CapaDatos
             }
         }
 
-        public List<Categoria> DevolverCategorias(out string msg)
+        public List<Categoria> DevolverCategorias(out string msg) // TODO ¿Por qué devolver null si no hay ninguna?
         {
             if (proyectoBiblioteca.Categorias.ToList().Count != 0)
             {
@@ -194,7 +194,7 @@ namespace CapaDatos
             {
                 return "No existe el libro";
             }
-
+            // TODO ¿¿Buscar entre TODOS los préstamos??? --> NOOOOOOOO Solo debe buscar en los del libro
             List<Prestamo> comprobarPrestamo = proyectoBiblioteca.Prestamos.Where(prest => prest.IdLibro == idLibro).ToList();
             if (comprobarPrestamo.Count != 0)
             {
@@ -242,7 +242,7 @@ namespace CapaDatos
                 return "Error, mensaje del error: " + ex.Message;
             }
         }
-
+        // TODO ¿No sería más lógico que busque por campo clave? Puede haber 2 títulos con el mismo título?. Para el resto de búsquedas igual
         public List<Libro> BuscarLibro(string nombreLibro)
         {
             List<Libro> libroFiltrado = new List<Libro>();
@@ -292,7 +292,7 @@ namespace CapaDatos
                 msg = "El número de carnet debe ser numérico";
                 return null;
             }
-
+            // TODO De nuevo busca entre todos los préstamos, y solo debe ser lo es lector
             List<Prestamo> prestamosLector = proyectoBiblioteca.Prestamos.Where(prest => prest.IdLector == numeroCarnet).ToList();
 
             if (prestamosLector.Count == 0)
@@ -307,13 +307,17 @@ namespace CapaDatos
 
         public bool ComprobarNumeroCarnet(int numeroCarnet)
         {
-            Lector comprobarLector = proyectoBiblioteca.Lectors.Find(numeroCarnet);
+            // TODO Mira el códiog siguiente
+            //Lector comprobarLector = proyectoBiblioteca.Lectors.Find(numeroCarnet);
 
-            if (comprobarLector != null)
-            {
-                return true;
-            }
-            return false;
+            //if (comprobarLector != null)
+            //{
+            //    return true;
+            //}
+            //return false;
+
+
+            return proyectoBiblioteca.Lectors.Find(numeroCarnet)!=null;
         }
 
         public string AnadirLector(string numeroCarnetS, string nombre, string contrasena, string telefonoS, string mail)
@@ -369,6 +373,7 @@ namespace CapaDatos
             Libro modificarLibro = new Libro();
             if (comprobarLibro.Disponibilidad == true)
             {
+                // TODO Ver como queda ahora sin usar NumPrestado
                 if ((comprobarLibro.Unidades - comprobarLibro.NumPrestado) == 1)
                 {
                     modificarLibro = new Libro(comprobarLibro.Isbn, comprobarLibro.Titulo, comprobarLibro.Editorial, comprobarLibro.Sipnosis, comprobarLibro.Caratula, comprobarLibro.Unidades, comprobarLibro.NumPrestado + 1, false);
@@ -392,9 +397,10 @@ namespace CapaDatos
                 exito = proyectoBiblioteca.SaveChanges();
                 if (exito != 0)
                 {
+                    // TODO Sobraría ¿verdad?
                     Libro libroUpdate = proyectoBiblioteca.Libros.SingleOrDefault(lib => lib.Isbn == idLibro);
                     libroUpdate.NumPrestado = modificarLibro.NumPrestado;
-                    libroUpdate.Disponibilidad = modificarLibro.Disponibilidad;
+                    libroUpdate.Disponibilidad = modificarLibro.Disponibilidad; // TODO Esto lo quitamos
                     exito = proyectoBiblioteca.SaveChanges();
                     if (exito != 0)
                     {
@@ -422,7 +428,7 @@ namespace CapaDatos
             if (proyectoBiblioteca.Lectors.Find(numeroCarnet) == null) return "Este socio no existe";
 
             if (proyectoBiblioteca.Libros.Find(isbn) == null) return "No existe el libro";
-
+            // TODO Lo de siempre..... No debe recorrer TODOS los préstamos, y no debe realizar la instrucción de búsqueda 2 veces (432,436)
             if (proyectoBiblioteca.Prestamos.Find(isbn, numeroCarnet) == null) return "Este préstamo no existe";
 
             try
@@ -431,7 +437,7 @@ namespace CapaDatos
                 proyectoBiblioteca.Prestamos.Remove(prestamoEliminar);
                 int exito = proyectoBiblioteca.SaveChanges();
 
-                if (exito != 0)
+                if (exito != 0) // todo sobraría casi todo
                 {
                     Libro libroUpdate = proyectoBiblioteca.Libros.SingleOrDefault(lib => lib.Isbn == isbn);
                     libroUpdate.NumPrestado = libroUpdate.NumPrestado - 1;

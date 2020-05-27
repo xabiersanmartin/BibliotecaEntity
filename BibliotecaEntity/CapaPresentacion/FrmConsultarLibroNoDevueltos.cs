@@ -27,7 +27,7 @@ namespace CapaPresentacion
                 MessageBox.Show(msg, "ATENCIÓN");
                 return;
             }
-
+            // TODO Recorrer todos los préstamos y obtener de ellos con el where los de fecha posterior
             dgvLibrosNoDevueltos.DataSource = (from lib in listLibros
                                                from prest in lib.Prestamos
                                                where prest.FechaDevolucion < DateTime.Today
