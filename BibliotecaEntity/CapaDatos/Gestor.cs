@@ -11,7 +11,7 @@ namespace CapaDatos
     {
         ProyectoBibliotecaXabierEntities proyectoBiblioteca;
 
-        public Gestor(out string msg) // TODO 
+        public Gestor(out string msg)
         {
             msg = "";
             try
@@ -20,11 +20,11 @@ namespace CapaDatos
             }
             catch (Exception ex)
             {
-                msg = "No se a podido conectar con la base de datos, contacte con el administrador, código de error: " + ex.Message;
+                msg = "No se ha podido conectar con la base de datos, contacte con el administrador, código de error: " + ex.Message;
             }
         }
 
-        public List<Categoria> DevolverCategorias(out string msg) // TODO ¿Por qué devolver null si no hay ninguna?
+        public List<Categoria> DevolverCategorias(out string msg)
         {
             if (proyectoBiblioteca.Categorias.ToList().Count != 0)
             {
@@ -34,7 +34,8 @@ namespace CapaDatos
             else
             {
                 msg = "No hay categorías";
-                return null;
+                List<Categoria> categoriasVacias = new List<Categoria>();
+                return categoriasVacias;
             }
 
         }
@@ -49,7 +50,8 @@ namespace CapaDatos
             else
             {
                 msg = "No hay autores";
-                return null;
+                List<Autor> autoresVacios = new List<Autor>();
+                return autoresVacios;
             }
 
         }
@@ -64,11 +66,27 @@ namespace CapaDatos
             else
             {
                 msg = "No hay libros";
-                return null;
+                List<Libro> librosVacios = new List<Libro>();
+                return librosVacios;
             }
         }
 
-        public string AnadirLibro(string isbnS, string titulo, string editorial, string sipnosis, string unidadesS, string caratula, List<Categoria> categorias, List<Autor> autores)
+        public List<Prestamo> DevolverPrestamos(out string msg)
+        {
+            if (proyectoBiblioteca.Prestamos.ToList().Count != 0)
+            {
+                msg = "";
+                return proyectoBiblioteca.Prestamos.ToList();
+            }
+            else
+            {
+                msg = "No hay préstamos";
+                List<Prestamo> prestamoVacios = new List<Prestamo>();
+                return prestamoVacios;
+            }
+        }
+
+        public string AnadirLibro(string isbnS, string titulo, string editorial, string sipnosis, string unidadesS, string caratula, bool disponibilidad, List<Categoria> categorias, List<Autor> autores)
         {
             int isbn;
             bool formato = false; //Esta variable la pondremos en true en caso de que no pueda transformarse de string a int ya que sera "un formato invalido"
@@ -116,7 +134,7 @@ namespace CapaDatos
                 }
             }
 
-            Libro newLibro = new Libro(isbn, titulo, editorial, sipnosis, caratula, unidades, 0, true, autores, categorias);
+            Libro newLibro = new Libro(isbn, titulo, editorial, sipnosis, caratula, unidades, 0, disponibilidad, autores, categorias);
 
             try
             {
@@ -194,20 +212,21 @@ namespace CapaDatos
             {
                 return "No existe el libro";
             }
-            // TODO ¿¿Buscar entre TODOS los préstamos??? --> NOOOOOOOO Solo debe buscar en los del libro
-            List<Prestamo> comprobarPrestamo = proyectoBiblioteca.Prestamos.Where(prest => prest.IdLibro == idLibro).ToList();
-            if (comprobarPrestamo.Count != 0)
+
+            if (eliminarLibro.Prestamos.Count != 0)
             {
                 string lectores = "";
                 int comprobacionMensaje = 0;
-                for (int i = 0; i < comprobarPrestamo.Count; i++)
+
+                foreach (var prest in eliminarLibro.Prestamos)
                 {
-                    Lector lector = proyectoBiblioteca.Lectors.Find(comprobarPrestamo[i].IdLector);
-                    int result = DateTime.Compare(comprobarPrestamo[i].FechaDevolucion, DateTime.Today);
+
+                    Lector lector = proyectoBiblioteca.Lectors.Find(prest.IdLector);
+                    int result = DateTime.Compare(prest.FechaDevolucion, DateTime.Today);
                     if (result > 0)
                     {
                         comprobacionMensaje += 1;
-                        if (i + 1 == comprobarPrestamo.Count)
+                        if (eliminarLibro.Prestamos.Last() == prest)
                         {
                             lectores += String.Concat(lector.Nombre + " ");
                         }
@@ -217,6 +236,7 @@ namespace CapaDatos
                         }
                     }
                 }
+
                 //Dependiendo de si esta prestado a 1 lector o a varios lectores sacamos un mensaje distinto.
                 if (lectores != "" && comprobacionMensaje > 1)
                 {
@@ -242,13 +262,30 @@ namespace CapaDatos
                 return "Error, mensaje del error: " + ex.Message;
             }
         }
-        // TODO ¿No sería más lógico que busque por campo clave? Puede haber 2 títulos con el mismo título?. Para el resto de búsquedas igual
-        public List<Libro> BuscarLibro(string nombreLibro)
+
+        public List<Libro> BuscarLibro(string busqueda)
         {
             List<Libro> libroFiltrado = new List<Libro>();
-            libroFiltrado = proyectoBiblioteca.Libros.Where(lib => lib.Titulo.Contains(nombreLibro)).ToList();
+
+            libroFiltrado = proyectoBiblioteca.Libros.Where(lib => lib.Titulo.Contains(busqueda)).ToList();
+
 
             return libroFiltrado;
+        }
+
+        public Libro LibroIsbn(int isbn, out string msg)
+        {
+            Libro buscarLibro = new Libro(isbn);
+            if (proyectoBiblioteca.Libros.Find(isbn) == null)
+            {
+                msg = "Este libro no existe";
+                return null;
+            }
+            else
+            {
+                msg = "";
+                return proyectoBiblioteca.Libros.Find(isbn);
+            }
         }
 
         public List<Autor> BuscarAutor(string nombreAutor)
@@ -292,32 +329,27 @@ namespace CapaDatos
                 msg = "El número de carnet debe ser numérico";
                 return null;
             }
-            // TODO De nuevo busca entre todos los préstamos, y solo debe ser lo es lector
-            List<Prestamo> prestamosLector = proyectoBiblioteca.Prestamos.Where(prest => prest.IdLector == numeroCarnet).ToList();
 
-            if (prestamosLector.Count == 0)
+            Lector lector = proyectoBiblioteca.Lectors.Find(numeroCarnet);
+            if (lector == null)
+            {
+                msg = "Este socio no existe";
+                return null;
+            }
+
+            if (lector.Prestamos.Count == 0)
             {
                 msg = "Este socio no tiene ningún préstamo";
                 return null;
             }
 
             msg = "";
-            return prestamosLector;
+            return lector.Prestamos.ToList();
         }
 
         public bool ComprobarNumeroCarnet(int numeroCarnet)
         {
-            // TODO Mira el códiog siguiente
-            //Lector comprobarLector = proyectoBiblioteca.Lectors.Find(numeroCarnet);
-
-            //if (comprobarLector != null)
-            //{
-            //    return true;
-            //}
-            //return false;
-
-
-            return proyectoBiblioteca.Lectors.Find(numeroCarnet)!=null;
+            return proyectoBiblioteca.Lectors.Find(numeroCarnet) != null;
         }
 
         public string AnadirLector(string numeroCarnetS, string nombre, string contrasena, string telefonoS, string mail)
@@ -369,21 +401,10 @@ namespace CapaDatos
             if (comprobarLibro == null) return "No existe el libro";
             if (comprobarPrestamo != null) return "Este socio ya tiene prestado este libro";
 
-            //Comprobaciones: disponibilidad del libro
-            Libro modificarLibro = new Libro();
-            if (comprobarLibro.Disponibilidad == true)
-            {
-                // TODO Ver como queda ahora sin usar NumPrestado
-                if ((comprobarLibro.Unidades - comprobarLibro.NumPrestado) == 1)
-                {
-                    modificarLibro = new Libro(comprobarLibro.Isbn, comprobarLibro.Titulo, comprobarLibro.Editorial, comprobarLibro.Sipnosis, comprobarLibro.Caratula, comprobarLibro.Unidades, comprobarLibro.NumPrestado + 1, false);
-                }
-                else
-                {
-                    modificarLibro = new Libro(comprobarLibro.Isbn, comprobarLibro.Titulo, comprobarLibro.Editorial, comprobarLibro.Sipnosis, comprobarLibro.Caratula, comprobarLibro.Unidades, comprobarLibro.NumPrestado + 1, true);
-                }
-            }
-            else
+            if (comprobarLibro.Prestamos.Count == comprobarLibro.Unidades) return "No quedan unidades de este libro";
+
+            //Libro modificarLibro = new Libro();
+            if (comprobarLibro.Disponibilidad != true)
             {
                 return "El libro no se puede prestar porque no esta disponible";
             }
@@ -391,26 +412,12 @@ namespace CapaDatos
             //Hacemos el préstamo
             try
             {
-                int exito;
                 Prestamo nuevoPrestamo = new Prestamo(idLibro, numeroCarnet, DateTime.Today, DateTime.Today.AddDays(14));
                 proyectoBiblioteca.Prestamos.Add(nuevoPrestamo);
-                exito = proyectoBiblioteca.SaveChanges();
+                int exito = proyectoBiblioteca.SaveChanges();
                 if (exito != 0)
                 {
-                    // TODO Sobraría ¿verdad?
-                    Libro libroUpdate = proyectoBiblioteca.Libros.SingleOrDefault(lib => lib.Isbn == idLibro);
-                    libroUpdate.NumPrestado = modificarLibro.NumPrestado;
-                    libroUpdate.Disponibilidad = modificarLibro.Disponibilidad; // TODO Esto lo quitamos
-                    exito = proyectoBiblioteca.SaveChanges();
-                    if (exito != 0)
-                    {
-                        return "Préstamo añadido correctamente";
-                    }
-                    else
-                    {
-                        proyectoBiblioteca.Prestamos.Remove(nuevoPrestamo);
-                        return "El préstamo no pudo realizarse";
-                    }
+                    return "Préstamo realizado correctamente";
                 }
                 else
                 {
@@ -425,42 +432,33 @@ namespace CapaDatos
 
         public String EliminarPrestamo(int isbn, int numeroCarnet)
         {
-            if (proyectoBiblioteca.Lectors.Find(numeroCarnet) == null) return "Este socio no existe";
+            Lector lector = proyectoBiblioteca.Lectors.Find(numeroCarnet);
+
+            if (lector == null)
+            {
+                return "Este socio no existe";
+            }
+            
 
             if (proyectoBiblioteca.Libros.Find(isbn) == null) return "No existe el libro";
-            // TODO Lo de siempre..... No debe recorrer TODOS los préstamos, y no debe realizar la instrucción de búsqueda 2 veces (432,436)
-            if (proyectoBiblioteca.Prestamos.Find(isbn, numeroCarnet) == null) return "Este préstamo no existe";
+
+            Prestamo prestamoComprobar = lector.Prestamos.Where(p => p.IdLector == numeroCarnet && p.IdLibro == isbn).SingleOrDefault();
+           
+            if (prestamoComprobar == null) return "Este préstamo no existe";
 
             try
             {
-                Prestamo prestamoEliminar = proyectoBiblioteca.Prestamos.Find(isbn, numeroCarnet);
-                proyectoBiblioteca.Prestamos.Remove(prestamoEliminar);
+                proyectoBiblioteca.Prestamos.Remove(prestamoComprobar);
                 int exito = proyectoBiblioteca.SaveChanges();
 
-                if (exito != 0) // todo sobraría casi todo
+                if (exito != 0)
                 {
-                    Libro libroUpdate = proyectoBiblioteca.Libros.SingleOrDefault(lib => lib.Isbn == isbn);
-                    libroUpdate.NumPrestado = libroUpdate.NumPrestado - 1;
-                    if (libroUpdate.Disponibilidad == false)
-                    {
-                        libroUpdate.Disponibilidad = true;
-                    }
-                    exito = proyectoBiblioteca.SaveChanges();
-                    if (exito != 0)
-                    {
-                        return "Libro devuelto correctamente";
-                    }
-                    else
-                    {
-                        proyectoBiblioteca.Prestamos.Add(prestamoEliminar);
-                        return "El libro no se ha podido devolver";
-                    }
+                    return "Libro devuelto correctamente";
                 }
                 else
                 {
                     return "El libro no se ha podido devolver";
                 }
-
             }
             catch (Exception ex)
             {

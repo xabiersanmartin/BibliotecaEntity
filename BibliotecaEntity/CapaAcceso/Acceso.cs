@@ -27,14 +27,19 @@ namespace CapaAcceso
             return nuevoAcceso.DevolverLibros(out msg);
         }
 
+        public List<Prestamo> DevolverPrestamos(out string msg)
+        {
+            return nuevoAcceso.DevolverPrestamos(out msg);
+        }
+
         public List<Libro> DevolverLibrosAutor(int idAutor, out string msg)
         {
             return nuevoAcceso.DevolverLibrosAutor(idAutor, out msg);
         }
 
-        public string AnadirLibro(string isbn, string titulo, string editorial, string sipnosis, string unidades, string caratula, List<Categoria> categorias, List<Autor> autores)
+        public string AnadirLibro(string isbn, string titulo, string editorial, string sipnosis, string unidades, string caratula, bool disponibilidad, List<Categoria> categorias, List<Autor> autores)
         {
-            return nuevoAcceso.AnadirLibro(isbn, titulo, editorial, sipnosis, unidades, caratula, categorias, autores);
+            return nuevoAcceso.AnadirLibro(isbn, titulo, editorial, sipnosis, unidades, caratula, disponibilidad, categorias, autores);
         }
 
         public string AnadirCategoria(string nombreCategoria)
@@ -52,9 +57,14 @@ namespace CapaAcceso
             return nuevoAcceso.EliminarLibro(idLibro);
         }
 
-        public List<Libro> BuscarLibros(string nombreLibro)
+        public List<Libro> BuscarLibros(string busqueda)
         {
-            return nuevoAcceso.BuscarLibro(nombreLibro);
+            return nuevoAcceso.BuscarLibro(busqueda);
+        }
+
+        public Libro LibroIsbn (int isbn, out string msg)
+        {
+            return nuevoAcceso.LibroIsbn(isbn, out msg);
         }
 
         public List<Autor> BuscarAutor(string nombreAutor)

@@ -20,19 +20,17 @@ namespace CapaPresentacion
 
         private void FrmConsultarLibroNoDevueltos_Load(object sender, EventArgs e)
         {
-            List<Libro> listLibros = Program.acceso.DevolverLibros(out string msg);
+            List<Prestamo> listPrestamos = Program.acceso.DevolverPrestamos(out string msg);
 
             if (msg != "")
             {
                 MessageBox.Show(msg, "ATENCIÓN");
                 return;
             }
-            // TODO Recorrer todos los préstamos y obtener de ellos con el where los de fecha posterior
-            dgvLibrosNoDevueltos.DataSource = (from lib in listLibros
-                                               from prest in lib.Prestamos
+
+            dgvLibrosNoDevueltos.DataSource = (from prest in listPrestamos
                                                where prest.FechaDevolucion < DateTime.Today
-                                               orderby lib.Titulo
-                                               select new {lib.Isbn, lib.Titulo, prest.Lectores.Nombre, prest.Lectores.Telefono, prest.Lectores.Mail}).ToList();
+                                               select new {prest.Libro.Isbn, prest.Libro.Titulo, prest.Lectores.Nombre, prest.Lectores.Telefono, prest.Lectores.Mail}).ToList();
 
             dgvLibrosNoDevueltos.Columns[2].HeaderText = "Socio";
             dgvLibrosNoDevueltos.Columns[3].HeaderText = "Teléfono Socio";

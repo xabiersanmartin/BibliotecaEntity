@@ -38,7 +38,7 @@ namespace Entidades
             NumPrestado = numPrestado;
             Disponibilidad = disponibilidad;
         }
-        //Revisar
+        
         public Libro(int isbn, string titulo, string editorial, string sipnosis, string caratula, int unidades, int numPrestado, bool disponibilidad,ICollection<Autor> autores, ICollection<Categoria> categorias) : this(isbn, titulo, editorial, sipnosis, caratula, unidades, numPrestado, disponibilidad)
         {
             Autores = autores;

@@ -14,6 +14,9 @@ namespace Entidades
     
     public partial class Prestamo : IEquatable<Prestamo>
     {
+        private int isbn;
+        private int numeroCarnet;
+
         public int IdLibro { get; set; }
         public int IdLector { get; set; }
         public System.DateTime FechaPrestado { get; set; }
@@ -32,6 +35,12 @@ namespace Entidades
             IdLector = idLector;
             FechaPrestado = fechaPrestado;
             FechaDevolucion = fechaDevolucion;
+        }
+
+        public Prestamo(int isbn, int numeroCarnet)
+        {
+            this.isbn = isbn;
+            this.numeroCarnet = numeroCarnet;
         }
 
         public override bool Equals(object obj)

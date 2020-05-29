@@ -45,6 +45,8 @@ namespace CapaPresentacion
                 lblEditorial.Text = "";
                 lblTitulo.Text = "";
                 lblUnidades.Text = "";
+                lblAutores.Text = "";
+                lblCategorias.Text = "";
                 pctCaratula.Image.Dispose();
                 pctCaratula.Image = null;
                 return;
@@ -55,6 +57,8 @@ namespace CapaPresentacion
             lblEditorial.Text = libroSeleccionado.Editorial;
             lblIsbn.Text = libroSeleccionado.Isbn.ToString();
             lblUnidades.Text = libroSeleccionado.Unidades.ToString();
+            lblAutores.Text = string.Concat(libroSeleccionado.Autores.Select(aut => aut.Descripcion + ", ")).Substring(0, string.Concat(libroSeleccionado.Autores.Select(aut => aut.Descripcion + ", ")).Length - 2);
+            lblCategorias.Text = string.Concat(libroSeleccionado.Categorias.Select(cat => cat.Descripcion + ", ")).Substring(0, string.Concat(libroSeleccionado.Categorias.Select(cat => cat.Descripcion + ", ")).Length - 2);
             pctCaratula.ImageLocation = rutaCaratulas + libroSeleccionado.Caratula;
             pctCaratula.SizeMode = PictureBoxSizeMode.StretchImage;
         }
@@ -100,6 +104,8 @@ namespace CapaPresentacion
                 lblEditorial.Text = "";
                 lblTitulo.Text = "";
                 lblUnidades.Text = "";
+                lblAutores.Text = "";
+                lblCategorias.Text = "";
                 pctCaratula.Image.Dispose();
                 pctCaratula.Image = null;
                 return;
@@ -115,6 +121,8 @@ namespace CapaPresentacion
             lblEditorial.Text = "";
             lblTitulo.Text = "";
             lblUnidades.Text = "";
+            lblAutores.Text = "";
+            lblCategorias.Text = "";
         }
 
         private void btnVolver_Click(object sender, EventArgs e)

@@ -23,13 +23,18 @@ namespace CapaPresentacion
             lblSocioNoValido.Visible = false;
             MostrarControles(false);
             txtContrasenaLector.PasswordChar = '*';
+            rbtTitulo.Checked = true;
+            btnBuscar.Visible = false;
         }
 
         private void txtNombreLibro_TextChanged(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(txtNombreLibro.Text))
+            if (!String.IsNullOrEmpty(txtNombreLibro.Text) && rbtTitulo.Checked == true)
             {
+
                 List<Libro> librosBuscados = Program.acceso.BuscarLibros(txtNombreLibro.Text);
+
+
 
                 if (librosBuscados.Count == 0)
                 {
@@ -38,7 +43,7 @@ namespace CapaPresentacion
                 else
                 {
                     dgvLibro.DataSource = (from lib in librosBuscados
-                                           select new { Isbn = lib.Isbn, lib.Titulo, lib.Editorial, lib.Sipnosis, disponibles = (lib.Unidades - lib.NumPrestado) }).ToList();
+                                           select new { Isbn = lib.Isbn, lib.Titulo, lib.Editorial, lib.Sipnosis, disponibles = (lib.Unidades - lib.Prestamos.Count) }).ToList();
                     EstablecerAnchoColumnas();
                 }
             }
@@ -176,6 +181,52 @@ namespace CapaPresentacion
             if (e.KeyChar == '.' && txtDecimal.Text.Contains("."))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void rbtIsbn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtIsbn.Checked == true)
+            {
+                btnBuscar.Visible = true;
+            }
+            else
+            {
+                btnBuscar.Visible = false;
+            }
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(txtNombreLibro.Text) && rbtIsbn.Checked)
+            {
+                if (int.TryParse(txtNombreLibro.Text,out int isbn))
+                {
+                    Libro libroBuscado = Program.acceso.LibroIsbn(isbn, out string msg);
+                    if (msg != "")
+                    {
+                        MessageBox.Show(msg, "ATENCIÓN");
+                        return;
+                    }
+                    else
+                    {
+                        List<Libro> listaParaDGV = new List<Libro> { libroBuscado };
+                        dgvLibro.DataSource = (from lib in listaParaDGV
+                                              select new { lib.Isbn, lib.Titulo, lib.Editorial, lib.Sipnosis, disponibles = lib.Unidades - lib.Prestamos.Count }).ToList();
+                        EstablecerAnchoColumnas();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("El isbn debe ser numérico", "ATENCIÓN");
+                    txtNombreLibro.Text = "";
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("El recuadro de la busqueda por isbn no puede estar vacío", "ATENCIÓN");
+                return;
             }
         }
     }

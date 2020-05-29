@@ -68,7 +68,7 @@ namespace CapaPresentacion
                 MessageBox.Show("Debes añadir minimo una categoría para poder añadir este libro", "ATENCIÓN");
                 return;
             }
-            string mensaje = Program.acceso.AnadirLibro(txtIsbn.Text, txtTitulo.Text, txtEditorial.Text, txtSipnosis.Text, txtUnidades.Text, caratula, anadirCategorias, anadirAutores);
+            string mensaje = Program.acceso.AnadirLibro(txtIsbn.Text, txtTitulo.Text, txtEditorial.Text, txtSipnosis.Text, txtUnidades.Text, caratula,rbDisponibilidad.Checked, anadirCategorias, anadirAutores);
             MessageBox.Show(mensaje);
 
             switch (mensaje)
@@ -170,6 +170,10 @@ namespace CapaPresentacion
             {
                 nombreImagen = saveFileDialog1.SafeFileName;
                 rutaImagen = saveFileDialog1.FileName;
+                if (!Directory.Exists(rutaCaratulas))
+                {
+                    Directory.CreateDirectory(rutaCaratulas);
+                }
                 if (!File.Exists(rutaCaratulas + nombreImagen))
                 {
                     File.Copy(rutaImagen, rutaCaratulas + nombreImagen);
@@ -242,29 +246,7 @@ namespace CapaPresentacion
             }
         }
 
-        private void cboCategorias_Enter(object sender, EventArgs e)
-        {
-            lstCategorias.Visible = true;
-            lblCategoriaSeleccionada.Visible = true;
-            lblEliminarCategoria.Visible = true;
-        }
 
-        private void cboCategorias_Leave(object sender, EventArgs e)
-        {
-            if (lstCategorias.Focused)
-            {
-                lstCategorias.Visible = true;
-                lblCategoriaSeleccionada.Visible = true;
-                lblEliminarCategoria.Visible = true;
-            }
-            else
-            {
-                lstCategorias.Visible = false;
-                lblCategoriaSeleccionada.Visible = false;
-                lblEliminarCategoria.Visible = false;
-            }
-             
-        }
 
         private void lstCategorias_DoubleClick(object sender, EventArgs e)
         {
@@ -282,13 +264,6 @@ namespace CapaPresentacion
                 lstCategorias.Items.Clear();
                 cboCategorias.SelectedIndex = -1;
             }
-        }
-
-        private void lstCategorias_Leave(object sender, EventArgs e)
-        {
-            lstCategorias.Visible = false;
-            lblCategoriaSeleccionada.Visible = false;
-            lblEliminarCategoria.Visible = false;
         }
 
         private void txtFiltrarAutor_TextChanged(object sender, EventArgs e)
@@ -310,32 +285,6 @@ namespace CapaPresentacion
                 }
             }
             
-        }
-
-        private void cboAutores_Enter(object sender, EventArgs e)
-        {
-            lstAutores.Visible = true;
-            lblAutoresSeleccionados.Visible = true;
-        }
-
-        private void cboAutores_Leave(object sender, EventArgs e)
-        {
-            if (lstAutores.Focused)
-            {
-                lstAutores.Visible = true;
-                lblAutoresSeleccionados.Visible = true;
-            }
-            else
-            {
-                lstAutores.Visible = false;
-                lblAutoresSeleccionados.Visible = false;
-            } 
-        }
-
-        private void lstAutores_Leave(object sender, EventArgs e)
-        {
-            lstAutores.Visible = false;
-            lblAutoresSeleccionados.Visible = false;
         }
 
         private void lstAutores_DoubleClick(object sender, EventArgs e)
@@ -361,6 +310,38 @@ namespace CapaPresentacion
         {
             cboAutores.SelectedIndex = -1;
             cboAutores.Text = "";
+        }
+
+        private void chkMostarCategorias_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkMostarCategorias.Checked)
+            {
+                lstCategorias.Visible = true;
+                lblCategoriaSeleccionada.Visible = true;
+                lblEliminarCategoria.Visible = true;
+            }
+            else
+            {
+                lstCategorias.Visible = false;
+                lblCategoriaSeleccionada.Visible = false;
+                lblEliminarCategoria.Visible = false;
+            }
+        }
+
+        private void chkAutoresSeleccionados_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAutoresSeleccionados.Checked)
+            {
+                lstAutores.Visible = true;
+                lblAutoresSeleccionados.Visible = true;
+
+            }
+            else
+            {
+                lstAutores.Visible = false;
+                lblAutoresSeleccionados.Visible = false;
+
+            }
         }
     }
 }

@@ -42,6 +42,10 @@
             this.lblEditorial = new System.Windows.Forms.Label();
             this.lblUnidades = new System.Windows.Forms.Label();
             this.pctCaratula = new System.Windows.Forms.PictureBox();
+            this.lblAutores = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lblCategorias = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pctCaratula)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,18 +53,20 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Monotype Corsiva", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(57, 65);
+            this.label7.Location = new System.Drawing.Point(43, 53);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(196, 41);
+            this.label7.Size = new System.Drawing.Size(156, 33);
             this.label7.TabIndex = 13;
             this.label7.Text = "Borrar un libro";
             // 
             // cboLibros
             // 
             this.cboLibros.FormattingEnabled = true;
-            this.cboLibros.Location = new System.Drawing.Point(146, 165);
+            this.cboLibros.Location = new System.Drawing.Point(110, 134);
+            this.cboLibros.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cboLibros.Name = "cboLibros";
-            this.cboLibros.Size = new System.Drawing.Size(296, 24);
+            this.cboLibros.Size = new System.Drawing.Size(223, 21);
             this.cboLibros.TabIndex = 14;
             this.cboLibros.SelectedIndexChanged += new System.EventHandler(this.cboLibros_SelectedIndexChanged);
             // 
@@ -68,17 +74,19 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(59, 165);
+            this.label1.Location = new System.Drawing.Point(44, 134);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 20);
+            this.label1.Size = new System.Drawing.Size(47, 17);
             this.label1.TabIndex = 15;
             this.label1.Text = "Libros";
             // 
             // btnBorrarLibro
             // 
-            this.btnBorrarLibro.Location = new System.Drawing.Point(183, 542);
+            this.btnBorrarLibro.Location = new System.Drawing.Point(123, 537);
+            this.btnBorrarLibro.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnBorrarLibro.Name = "btnBorrarLibro";
-            this.btnBorrarLibro.Size = new System.Drawing.Size(123, 44);
+            this.btnBorrarLibro.Size = new System.Drawing.Size(92, 36);
             this.btnBorrarLibro.TabIndex = 16;
             this.btnBorrarLibro.Text = "Borrar libro";
             this.btnBorrarLibro.UseVisualStyleBackColor = true;
@@ -86,9 +94,10 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(12, 718);
+            this.btnVolver.Location = new System.Drawing.Point(11, 653);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(123, 44);
+            this.btnVolver.Size = new System.Drawing.Size(92, 36);
             this.btnVolver.TabIndex = 17;
             this.btnVolver.Text = "&Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -98,9 +107,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(59, 246);
+            this.label2.Location = new System.Drawing.Point(44, 200);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 20);
+            this.label2.Size = new System.Drawing.Size(34, 17);
             this.label2.TabIndex = 18;
             this.label2.Text = "Isbn";
             // 
@@ -108,9 +118,10 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(61, 310);
+            this.label3.Location = new System.Drawing.Point(46, 252);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 20);
+            this.label3.Size = new System.Drawing.Size(43, 17);
             this.label3.TabIndex = 19;
             this.label3.Text = "Título";
             // 
@@ -118,9 +129,10 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(63, 375);
+            this.label4.Location = new System.Drawing.Point(47, 305);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(70, 20);
+            this.label4.Size = new System.Drawing.Size(59, 17);
             this.label4.TabIndex = 20;
             this.label4.Text = "Editorial";
             // 
@@ -128,9 +140,10 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(59, 440);
+            this.label5.Location = new System.Drawing.Point(44, 358);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(79, 20);
+            this.label5.Size = new System.Drawing.Size(68, 17);
             this.label5.TabIndex = 21;
             this.label5.Text = "Unidades";
             // 
@@ -138,51 +151,100 @@
             // 
             this.lblIsbn.AutoSize = true;
             this.lblIsbn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIsbn.Location = new System.Drawing.Point(160, 246);
+            this.lblIsbn.Location = new System.Drawing.Point(120, 200);
+            this.lblIsbn.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblIsbn.Name = "lblIsbn";
-            this.lblIsbn.Size = new System.Drawing.Size(0, 20);
+            this.lblIsbn.Size = new System.Drawing.Size(0, 17);
             this.lblIsbn.TabIndex = 22;
             // 
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
             this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.Location = new System.Drawing.Point(160, 310);
+            this.lblTitulo.Location = new System.Drawing.Point(120, 252);
+            this.lblTitulo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(0, 20);
+            this.lblTitulo.Size = new System.Drawing.Size(0, 17);
             this.lblTitulo.TabIndex = 23;
             // 
             // lblEditorial
             // 
             this.lblEditorial.AutoSize = true;
             this.lblEditorial.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEditorial.Location = new System.Drawing.Point(160, 375);
+            this.lblEditorial.Location = new System.Drawing.Point(120, 305);
+            this.lblEditorial.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEditorial.Name = "lblEditorial";
-            this.lblEditorial.Size = new System.Drawing.Size(0, 20);
+            this.lblEditorial.Size = new System.Drawing.Size(0, 17);
             this.lblEditorial.TabIndex = 24;
             // 
             // lblUnidades
             // 
             this.lblUnidades.AutoSize = true;
             this.lblUnidades.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUnidades.Location = new System.Drawing.Point(160, 440);
+            this.lblUnidades.Location = new System.Drawing.Point(120, 358);
+            this.lblUnidades.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblUnidades.Name = "lblUnidades";
-            this.lblUnidades.Size = new System.Drawing.Size(0, 20);
+            this.lblUnidades.Size = new System.Drawing.Size(0, 17);
             this.lblUnidades.TabIndex = 25;
             // 
             // pctCaratula
             // 
-            this.pctCaratula.Location = new System.Drawing.Point(814, 233);
+            this.pctCaratula.Location = new System.Drawing.Point(610, 189);
+            this.pctCaratula.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pctCaratula.Name = "pctCaratula";
-            this.pctCaratula.Size = new System.Drawing.Size(354, 281);
+            this.pctCaratula.Size = new System.Drawing.Size(266, 228);
             this.pctCaratula.TabIndex = 26;
             this.pctCaratula.TabStop = false;
             // 
+            // lblAutores
+            // 
+            this.lblAutores.AutoSize = true;
+            this.lblAutores.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAutores.Location = new System.Drawing.Point(120, 412);
+            this.lblAutores.Name = "lblAutores";
+            this.lblAutores.Size = new System.Drawing.Size(0, 17);
+            this.lblAutores.TabIndex = 27;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(44, 412);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(57, 17);
+            this.label6.TabIndex = 28;
+            this.label6.Text = "Autores";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(44, 462);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(76, 17);
+            this.label8.TabIndex = 30;
+            this.label8.Text = "Categorías";
+            // 
+            // lblCategorias
+            // 
+            this.lblCategorias.AutoSize = true;
+            this.lblCategorias.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCategorias.Location = new System.Drawing.Point(125, 466);
+            this.lblCategorias.Name = "lblCategorias";
+            this.lblCategorias.Size = new System.Drawing.Size(0, 17);
+            this.lblCategorias.TabIndex = 29;
+            // 
             // FrmBorrarLibro
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1273, 774);
+            this.ClientSize = new System.Drawing.Size(955, 700);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.lblCategorias);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.lblAutores);
             this.Controls.Add(this.pctCaratula);
             this.Controls.Add(this.lblUnidades);
             this.Controls.Add(this.lblEditorial);
@@ -198,6 +260,7 @@
             this.Controls.Add(this.cboLibros);
             this.Controls.Add(this.label7);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FrmBorrarLibro";
             this.Text = "Borrar Libro";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -224,5 +287,9 @@
         private System.Windows.Forms.Label lblEditorial;
         private System.Windows.Forms.Label lblUnidades;
         private System.Windows.Forms.PictureBox pctCaratula;
+        private System.Windows.Forms.Label lblAutores;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblCategorias;
     }
 }
