@@ -176,11 +176,11 @@ namespace CapaPresentacion
                 }
                 if (!File.Exists(rutaCaratulas + nombreImagen))
                 {
-                    File.Copy(rutaImagen, rutaCaratulas + nombreImagen);
+                    File.Copy(rutaImagen, rutaCaratulas + nombreImagen); // TODO ¿Antes de saber si es válida? Lo lógico sería hacer esto al grabar pero en fin....
                 }
                 else
                 {
-                    MessageBox.Show("La carátula seleccionada ya esta asignada a un libro", "ATENCIÓN");
+                    MessageBox.Show("La carátula seleccionada ya esta asignada a un libro", "ATENCIÓN"); 
                     return;
                 }
                 pctCaratula.Image = new Bitmap(rutaCaratulas + nombreImagen);

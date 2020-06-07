@@ -26,7 +26,7 @@ namespace CapaDatos
 
         public List<Categoria> DevolverCategorias(out string msg)
         {
-            if (proyectoBiblioteca.Categorias.ToList().Count != 0)
+            if (proyectoBiblioteca.Categorias.ToList().Count != 0) // TODO Te quería decir, que en realidad vale con devolver proyectoBiblioteca.Categorias.ToList(), pues es lo que hará aunque no tenga ninguna (sin necesidad del if) 
             {
                 msg = "";
                 return proyectoBiblioteca.Categorias.ToList();
@@ -122,7 +122,7 @@ namespace CapaDatos
             {
                 if (proyectoBiblioteca.Categorias.Find(cat.IdCategoria) == null)
                 {
-                    return "No existe esta categoria";
+                    return "No existe esta categoria"; // TODO Debería devolver el id para saber a cual se refiere
                 }
             }
 
@@ -179,7 +179,7 @@ namespace CapaDatos
         {
             if (String.IsNullOrWhiteSpace(nombreAutor)) return "El nombre del autor no puede quedarse vacío";
 
-            Autor comprobarAutor = proyectoBiblioteca.Autors.Where(autor => autor.Descripcion == nombreAutor).SingleOrDefault();
+            Autor comprobarAutor = proyectoBiblioteca.Autors.Where(autor => autor.Descripcion == nombreAutor).SingleOrDefault(); // TODO Control de mayúsculas y minúsculas
 
             if (comprobarAutor != null) return "Este autor ya existe";
 
@@ -265,7 +265,7 @@ namespace CapaDatos
 
         public List<Libro> BuscarLibro(string busqueda)
         {
-            List<Libro> libroFiltrado = new List<Libro>();
+            List<Libro> libroFiltrado = new List<Libro>(); // TODO Por mucho que le llames en singular, es una lista
 
             libroFiltrado = proyectoBiblioteca.Libros.Where(lib => lib.Titulo.Contains(busqueda)).ToList();
 
@@ -276,7 +276,7 @@ namespace CapaDatos
         public Libro LibroIsbn(int isbn, out string msg)
         {
             Libro buscarLibro = new Libro(isbn);
-            if (proyectoBiblioteca.Libros.Find(isbn) == null)
+            if (proyectoBiblioteca.Libros.Find(isbn) == null) // TODO Nunca hay que repetir una búsqueda 2 veces. Debías guardar el dato en una libro y trabajar con él 
             {
                 msg = "Este libro no existe";
                 return null;
@@ -288,7 +288,7 @@ namespace CapaDatos
             }
         }
 
-        public List<Autor> BuscarAutor(string nombreAutor)
+        public List<Autor> BuscarAutor(string nombreAutor) // TODO De nuevo parece que es uno pero puede devolver varios
         {
             List<Autor> autorFiltrado = new List<Autor>();
             autorFiltrado = proyectoBiblioteca.Autors.Where(aut => aut.Descripcion.Contains(nombreAutor)).ToList();
@@ -392,12 +392,12 @@ namespace CapaDatos
         }
         public string AnadirPrestamo(int idLibro, int numeroCarnet)
         {
-            Libro comprobarLibro = proyectoBiblioteca.Libros.Find(idLibro);
-            Prestamo comprobarPrestamo = proyectoBiblioteca.Prestamos.Find(idLibro, numeroCarnet);
+            Libro comprobarLibro = proyectoBiblioteca.Libros.Find(idLibro); // TODO Si no existe el libro, para que quieres que siga mirando 
+            Prestamo comprobarPrestamo = proyectoBiblioteca.Prestamos.Find(idLibro, numeroCarnet); // TODO ¿Entre todos los préstamos? --> Debía ser solo los del libro o lector
             Lector comprobarLector = proyectoBiblioteca.Lectors.Find(numeroCarnet);
 
             //Comprobaciones: los datos introducidos son válidos
-            if (comprobarLector == null) return "No existe el socio";
+            if (comprobarLector == null) return "No existe el socio"; // TODO Estos if debían ir antes
             if (comprobarLibro == null) return "No existe el libro";
             if (comprobarPrestamo != null) return "Este socio ya tiene prestado este libro";
 
@@ -439,12 +439,12 @@ namespace CapaDatos
                 return "Este socio no existe";
             }
             
-
+            // TODO Otra vez, búsqueda entre TODOS los libros, en lugar de buscar solo entre los que tiene el lector
             if (proyectoBiblioteca.Libros.Find(isbn) == null) return "No existe el libro";
-
+            // TODO Mas de lo mismo...
             Prestamo prestamoComprobar = lector.Prestamos.Where(p => p.IdLector == numeroCarnet && p.IdLibro == isbn).SingleOrDefault();
            
-            if (prestamoComprobar == null) return "Este préstamo no existe";
+            if (prestamoComprobar == null) return "Este préstamo no existe";  
 
             try
             {

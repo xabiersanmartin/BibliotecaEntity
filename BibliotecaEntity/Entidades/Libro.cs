@@ -22,7 +22,7 @@ namespace Entidades
             this.Categorias = new HashSet<Categoria>();
         }
 
-        public Libro(int isbn)
+        public Libro(int isbn) // TODO Los contructores no están bien planteados, ya que solo el vacío carga las tablas. Haces lo mismo en todas las entidades
         {
             Isbn = isbn;
         }

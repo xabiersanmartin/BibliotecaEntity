@@ -212,7 +212,7 @@ namespace CapaPresentacion
                     {
                         List<Libro> listaParaDGV = new List<Libro> { libroBuscado };
                         dgvLibro.DataSource = (from lib in listaParaDGV
-                                              select new { lib.Isbn, lib.Titulo, lib.Editorial, lib.Sipnosis, disponibles = lib.Unidades - lib.Prestamos.Count }).ToList();
+                                              select new { lib.Isbn, lib.Titulo, lib.Editorial, lib.Sipnosis, disponibles = lib.Unidades - lib.Prestamos.Count }).ToList(); // TODO Error de ejecución si el lib no tiene Prestamos
                         EstablecerAnchoColumnas();
                     }
                 }

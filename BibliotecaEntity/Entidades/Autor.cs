@@ -20,7 +20,7 @@ namespace Entidades
             this.Libros = new HashSet<Libro>();
         }
 
-        public Autor(string descripcion)
+        public Autor(string descripcion) // TODO No carga la tabla
         {
             Descripcion = descripcion;
         }
